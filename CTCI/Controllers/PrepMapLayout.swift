@@ -7,6 +7,7 @@ class PrepMapLayout: UICollectionViewLayout {
     
     //2. Configurable properties
     fileprivate var numberOfColumns = 5
+    fileprivate var numberOfElementsInColumn = 7
     fileprivate var cellPadding: CGFloat = 6
     
     //3. Array to keep a cache of attributes.
@@ -40,27 +41,37 @@ class PrepMapLayout: UICollectionViewLayout {
         let mainHeight:CGFloat = 125.0
         
         // Cell sizing arrays
-        let height:[CGFloat] = [mainHeight, arrowSize, mainHeight, arrowSize,  mainHeight]
-        let width:[CGFloat] = [mainWidth, arrowSize, mainWidth, arrowSize,  mainWidth]
+        let height:[CGFloat] = [mainHeight, arrowSize, mainHeight, arrowSize,  mainHeight, arrowSize, arrowSize]
+        let width:[CGFloat] = [mainWidth, arrowSize, mainWidth, arrowSize,  mainWidth, arrowSize , arrowSize]
         
         // Offset parameters
         var xOffset = [CGFloat]()
         var currentOffset:CGFloat = 0
-        for column in 0 ..< numberOfColumns {
-            xOffset.append(currentOffset)
-            currentOffset += width[column]
+        for column in 0 ..< numberOfElementsInColumn {
+            if column < 5{
+                xOffset.append(currentOffset)
+                currentOffset += width[column]
+            }else{
+//                let xOff = column == 5 ? xOffset[4] : xOffset[0]
+                let xOff = column == 5 ? xOffset[4]  + arrowSize / 2 : xOffset[0] + arrowSize / 2
+
+                xOffset.append(xOff)
+            }
+
         }
-        var yOffset = [0, (mainHeight / 2 - arrowSize / 2), 0, (mainHeight / 2 - arrowSize / 2), 0]
+        var yOffset = [0, (mainHeight / 2 - arrowSize / 2), 0, (mainHeight / 2 - arrowSize / 2), 0, mainHeight, mainHeight]
 
         // Used to keep trach of which column we are on
         var column = 0
 
         for item in 0 ..< collectionView.numberOfItems(inSection: 0) {
             
+            let element = item % numberOfElementsInColumn
+            
             let indexPath = IndexPath(item: item, section: 0)
             
-            let h = height[item % 5]
-            let w = width[item % 5]
+            let h = height[item % numberOfElementsInColumn]
+            let w = width[item % numberOfElementsInColumn]
             
             let frame = CGRect(x: xOffset[column], y: yOffset[column], width: w, height: h)
             let insetFrame = frame.insetBy(dx: cellPadding, dy: cellPadding)
@@ -74,12 +85,16 @@ class PrepMapLayout: UICollectionViewLayout {
             contentHeight = max(contentHeight, frame.maxY)
             
             // When the content is an arrow the offset is the height of the main cell - the height of the arrow
-            let yPos = item % 5 == 1 || item % 5 == 3 ? yOffset[column] + mainHeight - arrowSize: yOffset[column]
+            var yPos = element == 1 || element == 3 ? yOffset[column] + mainHeight : yOffset[column] + arrowSize
+            
+            if element >= 5{
+                yPos = yOffset[column] + mainHeight
+            }
             // Update the yoffset
             yOffset[column] = yPos + h + cellPadding
             
             // Determine the current column
-            column = column < (numberOfColumns - 1) ? (column + 1) : 0
+            column = column < (numberOfElementsInColumn - 1) ? (column + 1) : 0
         }
     }
     

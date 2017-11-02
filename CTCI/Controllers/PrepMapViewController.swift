@@ -27,15 +27,21 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ContentCell", for: indexPath) as! PrepMapContentCell
         
-        if test[indexPath.row] % 5 == 1 || test[indexPath.row] % 5 == 3{
+        if (test[indexPath.row] % 7) % 2 == 1 || test[indexPath.row] % 7 == 6{
             let otherCell = collectionView.dequeueReusableCell(withReuseIdentifier: "ArrowCell", for: indexPath) as! HorizontalArrowCell
             
             var img = UIImage(named: "arrow")
             
             // DIrection of the arrow
-            if indexPath.row % 10 > 5{
+            if test[indexPath.row] % 7 >= 5{
+                img = UIImage(cgImage: (img?.cgImage)!, scale: 1, orientation: .right)
+            }
+            else if indexPath.row % 14 > 7{
                 img = UIImage(cgImage: (img?.cgImage)!, scale: 1, orientation: .down)
             }
             
@@ -57,4 +63,7 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
         return cell
     }
     
+    func getCellType(index: Int){
+        
+    }
 }
