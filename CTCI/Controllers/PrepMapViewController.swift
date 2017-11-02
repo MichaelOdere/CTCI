@@ -39,7 +39,14 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
             
             // DIrection of the arrow
             if test[indexPath.row] % 7 >= 5{
-                img = UIImage(cgImage: (img?.cgImage)!, scale: 1, orientation: .right)
+                if test[indexPath.row] % 7 == 5 && test[indexPath.row] % 14 < 7{
+                    img = UIImage(cgImage: (img?.cgImage)!, scale: 1, orientation: .right)
+                }else if test[indexPath.row] % 7 == 6 && test[indexPath.row] % 14 > 7{
+                    img = UIImage(cgImage: (img?.cgImage)!, scale: 1, orientation: .right)
+                }else{
+                    img = nil
+                }
+
             }
             else if indexPath.row % 14 > 7{
                 img = UIImage(cgImage: (img?.cgImage)!, scale: 1, orientation: .down)
@@ -49,7 +56,9 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
 
             return otherCell
         }
+    
         cell.title.text = String(test[indexPath.row])
+    
         let num = 100
         if num > 1{
             cell.duration.text = " \(num) days"
@@ -57,7 +66,7 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
             cell.duration.text = " \(num) day"
         }
         
-        cell.descriptionText.text = "this is intentionally supposed to be a long amount of text in order to determine how much space I have! Feel free to continue as I will"
+        cell.descriptionText.text = "this is ll"
         
         cell.sizeToFit()
         return cell
