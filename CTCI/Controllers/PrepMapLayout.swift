@@ -1,17 +1,12 @@
 
 import UIKit
 
-protocol PrepMapLayoutDelegate: class {
-    // 1. Method to ask the delegate for the height of the image
-    func collectionView(_ collectionView:UICollectionView, heightForPhotoAtIndexPath indexPath:IndexPath) -> CGFloat
-}
-
 class PrepMapLayout: UICollectionViewLayout {
     //1. Pinterest Layout Delegate
-    weak var delegate: PrepMapLayoutDelegate!
+//    weak var delegate: PrepMapLayoutDelegate!
     
     //2. Configurable properties
-    fileprivate var numberOfColumns = 2
+    fileprivate var numberOfColumns = 5
     fileprivate var cellPadding: CGFloat = 6
     
     //3. Array to keep a cache of attributes.
@@ -33,39 +28,57 @@ class PrepMapLayout: UICollectionViewLayout {
     }
     
     override func prepare() {
-        // 1. Only calculate once
+        // Only calculate once
         guard cache.isEmpty == true, let collectionView = collectionView else {
             return
         }
-        // 2. Pre-Calculates the X Offset for every column and adds an array to increment the currently max Y Offset for each column
-        let columnWidth = contentWidth / CGFloat(numberOfColumns)
-        var xOffset = [CGFloat]()
-        for column in 0 ..< numberOfColumns {
-            xOffset.append(CGFloat(column) * columnWidth)
-        }
-        var column = 0
-        var yOffset = [CGFloat](repeating: 0, count: numberOfColumns)
+
+        // Cell sizing parameters
+        let ratio:CGFloat = 0.75
+        let arrowSize:CGFloat = (contentWidth * (1-ratio)) / 2
+        let mainWidth:CGFloat = (contentWidth * ratio) / 3
+        let mainHeight:CGFloat = 125.0
         
-        // 3. Iterates through the list of items in the first section
+        // Cell sizing arrays
+        let height:[CGFloat] = [mainHeight, arrowSize, mainHeight, arrowSize,  mainHeight]
+        let width:[CGFloat] = [mainWidth, arrowSize, mainWidth, arrowSize,  mainWidth]
+        
+        // Offset parameters
+        var xOffset = [CGFloat]()
+        var currentOffset:CGFloat = 0
+        for column in 0 ..< numberOfColumns {
+            xOffset.append(currentOffset)
+            currentOffset += width[column]
+        }
+        var yOffset = [0, (mainHeight / 2 - arrowSize / 2), 0, (mainHeight / 2 - arrowSize / 2), 0]
+
+        // Used to keep trach of which column we are on
+        var column = 0
+
         for item in 0 ..< collectionView.numberOfItems(inSection: 0) {
             
             let indexPath = IndexPath(item: item, section: 0)
             
-            // 4. Asks the delegate for the height of the picture and the annotation and calculates the cell frame.
-            let photoHeight = delegate.collectionView(collectionView, heightForPhotoAtIndexPath: indexPath)
-            let height = cellPadding * 2 + photoHeight
-            let frame = CGRect(x: xOffset[column], y: yOffset[column], width: columnWidth, height: height)
+            let h = height[item % 5]
+            let w = width[item % 5]
+            
+            let frame = CGRect(x: xOffset[column], y: yOffset[column], width: w, height: h)
             let insetFrame = frame.insetBy(dx: cellPadding, dy: cellPadding)
             
-            // 5. Creates an UICollectionViewLayoutItem with the frame and add it to the cache
+            // Creates an UICollectionViewLayoutItem with the frame and add it to the cache
             let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
             attributes.frame = insetFrame
             cache.append(attributes)
             
-            // 6. Updates the collection view content height
+            // Updates the collection view content height
             contentHeight = max(contentHeight, frame.maxY)
-            yOffset[column] = yOffset[column] + height
             
+            // When the content is an arrow the offset is the height of the main cell - the height of the arrow
+            let yPos = item % 5 == 1 || item % 5 == 3 ? yOffset[column] + mainHeight - arrowSize: yOffset[column]
+            // Update the yoffset
+            yOffset[column] = yPos + h + cellPadding
+            
+            // Determine the current column
             column = column < (numberOfColumns - 1) ? (column + 1) : 0
         }
     }

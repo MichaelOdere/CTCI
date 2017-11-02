@@ -10,8 +10,11 @@ import UIKit
 
 class PrepMapContentCell:UICollectionViewCell{
    
+    @IBOutlet var view:UIView!
     @IBOutlet var title: UILabel!
     @IBOutlet var duration: UILabel!
     @IBOutlet var descriptionText: UILabel!
 
 }
+
+

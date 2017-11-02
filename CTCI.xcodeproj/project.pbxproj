@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F9013F441FA7DE810013E658 /* PrepMapCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9013F431FA7DE810013E658 /* PrepMapCollectionView.swift */; };
 		F9013F461FA7E5B60013E658 /* PrepMapContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9013F451FA7E5B60013E658 /* PrepMapContentCell.swift */; };
 		F9013F481FA7F13D0013E658 /* HorizontalArrowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9013F471FA7F13D0013E658 /* HorizontalArrowCell.swift */; };
 		F90882351F9AC7D2002B4AAA /* StudyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90882341F9AC7D2002B4AAA /* StudyViewController.swift */; };
@@ -32,7 +31,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		F9013F431FA7DE810013E658 /* PrepMapCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrepMapCollectionView.swift; sourceTree = "<group>"; };
 		F9013F451FA7E5B60013E658 /* PrepMapContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrepMapContentCell.swift; sourceTree = "<group>"; };
 		F9013F471FA7F13D0013E658 /* HorizontalArrowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalArrowCell.swift; sourceTree = "<group>"; };
 		F90882341F9AC7D2002B4AAA /* StudyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyViewController.swift; sourceTree = "<group>"; };
@@ -106,7 +104,6 @@
 			children = (
 				F9BCE2E81FA315610089BB27 /* MyDateViewController.swift */,
 				F98871FA1FA2A263009E4AEA /* PrepMapViewController.swift */,
-				F9013F431FA7DE810013E658 /* PrepMapCollectionView.swift */,
 				F98CE0CB1FA84608006D579B /* PrepMapLayout.swift */,
 				F90882341F9AC7D2002B4AAA /* StudyViewController.swift */,
 				F992450E1F9D221C00CB61D8 /* NotesViewController.swift */,
@@ -219,7 +216,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F9013F441FA7DE810013E658 /* PrepMapCollectionView.swift in Sources */,
 				F924A9B71F9D6C6300B5496C /* QuestionStore.swift in Sources */,
 				F99245111F9D2C3100CB61D8 /* NoteCell.swift in Sources */,
 				F9013F461FA7E5B60013E658 /* PrepMapContentCell.swift in Sources */,

@@ -30,9 +30,7 @@ class MyDateViewController: UIViewController{
         }
         
         currentDateLabel.text = "You currently have \(dateAsString) selected for your start date"
-        
-//        datePicker.minimumDate = Date()
-        datePicker.datePickerMode = UIDatePickerMode.date
+                datePicker.datePickerMode = UIDatePickerMode.date
         
     }
     
