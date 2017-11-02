@@ -52,7 +52,6 @@ class PrepMapLayout: UICollectionViewLayout {
                 xOffset.append(currentOffset)
                 currentOffset += width[column]
             }else{
-//                let xOff = column == 5 ? xOffset[4] : xOffset[0]
                 let xOff = column == 5 ? xOffset[4]  + arrowSize / 2 : xOffset[0] + arrowSize / 2
 
                 xOffset.append(xOff)
