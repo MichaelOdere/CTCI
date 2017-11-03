@@ -10,6 +10,8 @@ import UIKit
 
 class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate{
     let test = Array(0...29)
+    var lastFrame:CGRect!
+    var isAnimating = false
     
     @IBOutlet var collectionView: UICollectionView!
     //    @IBOutlet var navBar: UINavigationItem!
@@ -26,6 +28,37 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
         return test.count
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        if isAnArrow(index: indexPath.item ) || isAnimating{
+            return
+        }
+        guard let cell = collectionView.cellForItem(at: indexPath) else { return }
+        
+        isAnimating = true
+        
+        UIView.animate(withDuration: 0.2, animations: {
+            
+            let isShowing:Bool = cell.frame == collectionView.bounds ? true : false
+            
+            if isShowing{
+                cell.frame = self.lastFrame
+                collectionView.isScrollEnabled = true
+
+            }else{
+                self.lastFrame = cell.frame
+                cell.frame = collectionView.bounds
+                collectionView.isScrollEnabled = false
+                cell.superview?.bringSubview(toFront: cell)
+            }
+
+            
+        },completion:{ (finished: Bool) in
+            self.isAnimating = false
+        })
+        
+    }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         if isAnArrow(index: indexPath.item){
@@ -36,7 +69,7 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
 
         }else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ContentCell", for: indexPath) as! PrepMapContentCell
-
+            
             cell.title.text = String(test[indexPath.row])
             
             let num = 100
@@ -46,14 +79,13 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
                 cell.duration.text = " \(num) day"
             }
             
-            cell.descriptionText.text = "this is ll"
+            cell.descriptionText.text = "this is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is ll"
             
             cell.sizeToFit()
             return cell
 
         }
-    
-       
+        
     }
     
     // C = Content
@@ -100,4 +132,49 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
         
         return img
     }
+    
+//    func animateElements(){
+//        for cell in collectionView.visibleCells{
+//            print(cell.)
+//        }
+//    }
 }
+
+
+
+//    func animateCell(cell: UICollectionViewCell, index: Int) {
+//
+//        let showAnimation = CABasicAnimation(keyPath: "cornerRadius")
+//        showAnimation.fromValue = 200
+//        cell.layer.cornerRadius = 0
+//        showAnimation.toValue = 0
+//        showAnimation.beginTime =  CACurrentMediaTime() + (Double(index) *  0.5)
+//        showAnimation.duration = 1
+//
+//
+//        let opacityAnimation =  CABasicAnimation(keyPath: "opacity")
+//        opacityAnimation.fromValue = 0
+//        cell.layer.opacity = 1
+//        opacityAnimation.toValue = 1
+//        opacityAnimation.beginTime =  CACurrentMediaTime() + (Double(index) *  0.5)
+//        opacityAnimation.duration = 1
+//
+//        let showLayer = CALayer()
+//        let opacityLayer = CALayer()
+//
+////        showLayer.add(showAnimation, forKey: showAnimation.keyPath)
+////        showLayer.cornerRadius = 0
+////
+////        opacityLayer.add(opacityAnimation, forKey: opacityAnimation.keyPath)
+////        opacityLayer.opacity = 0
+//
+//        cell.layer.add(opacityAnimation, forKey: opacityAnimation.keyPath)
+////        cell.layer.addSublayer(showLayer)
+////        cell.layer.addSublayer(opacityLayer)
+//    }
+
+//    func animateCellAtIndexPath(indexPath: IndexPath) {
+//        guard let cell = collectionView.cellForItem(at: indexPath) else { return }
+//        animateCell(cell: cell, index: indexPath.item)
+//    }
+

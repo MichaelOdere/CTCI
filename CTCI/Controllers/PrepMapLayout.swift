@@ -66,7 +66,6 @@ class PrepMapLayout: UICollectionViewLayout {
         for item in 0 ..< collectionView.numberOfItems(inSection: 0) {
             
             let element = item % numberOfElementsInColumn
-            
             let indexPath = IndexPath(item: item, section: 0)
             
             let h = height[item % numberOfElementsInColumn]
