@@ -323,7 +323,7 @@
                             </navigationBar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Crz-Ut-LB1">
                                 <rect key="frame" x="0.0" y="49" width="375" height="569"/>
-                                <color key="backgroundColor" red="1" green="0.7115756281148391" blue="0.95784622555403998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.67417293787002563" blue="0.75885450839996338" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewLayout key="collectionViewLayout" id="uyf-Ic-JSg" customClass="PrepMapLayout" customModule="CTCI" customModuleProvider="target"/>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ContentCell" id="cc9-fU-iOY" customClass="PrepMapContentCell" customModule="CTCI" customModuleProvider="target">
@@ -340,7 +340,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="150 days" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5EH-Iu-VpP">
-                                                    <rect key="frame" x="30" y="86" width="43" height="12"/>
+                                                    <rect key="frame" x="26" y="86" width="43" height="12"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -353,7 +353,7 @@
                                                 </label>
                                             </subviews>
                                         </view>
-                                        <color key="backgroundColor" red="0.82761734310000001" green="1" blue="0.89231573279999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.87833553552627563" green="0.87848657369613647" blue="0.87832605838775635" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstItem="L7C-bO-fnf" firstAttribute="top" secondItem="hHj-eF-doB" secondAttribute="bottom" constant="7" id="I24-HQ-MaN"/>
                                             <constraint firstItem="L7C-bO-fnf" firstAttribute="leading" secondItem="cc9-fU-iOY" secondAttribute="leadingMargin" id="I9l-ga-umR"/>
@@ -361,7 +361,7 @@
                                             <constraint firstItem="hHj-eF-doB" firstAttribute="centerX" secondItem="cc9-fU-iOY" secondAttribute="centerX" id="OoS-Qc-Rya"/>
                                             <constraint firstItem="hHj-eF-doB" firstAttribute="top" secondItem="cc9-fU-iOY" secondAttribute="top" id="Txu-CA-EFp"/>
                                             <constraint firstAttribute="bottom" secondItem="5EH-Iu-VpP" secondAttribute="bottom" constant="2" id="X6T-Wd-0vq"/>
-                                            <constraint firstAttribute="trailing" secondItem="5EH-Iu-VpP" secondAttribute="trailing" constant="2" id="c1Z-50-Eug"/>
+                                            <constraint firstAttribute="trailing" secondItem="5EH-Iu-VpP" secondAttribute="trailing" constant="6" id="c1Z-50-Eug"/>
                                             <constraint firstItem="L7C-bO-fnf" firstAttribute="trailing" secondItem="cc9-fU-iOY" secondAttribute="trailingMargin" id="eBJ-5q-uWw"/>
                                         </constraints>
                                         <size key="customSize" width="75" height="100"/>

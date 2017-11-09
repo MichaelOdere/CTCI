@@ -67,11 +67,19 @@ class PrepMapLayout: UICollectionViewLayout {
             
             let element = item % numberOfElementsInColumn
             let indexPath = IndexPath(item: item, section: 0)
-            
+            let isGoingLeft = item % 14 >= 7
             let h = height[item % numberOfElementsInColumn]
             let w = width[item % numberOfElementsInColumn]
             
-            let frame = CGRect(x: xOffset[column], y: yOffset[column], width: w, height: h)
+            var xOffIndex = column
+            
+            if isGoingLeft{
+                if item % 7 < 5{
+                    xOffIndex = 4-column
+                }
+            }
+            
+            let frame = CGRect(x: xOffset[xOffIndex], y: yOffset[column], width: w, height: h)
             let insetFrame = frame.insetBy(dx: cellPadding, dy: cellPadding)
             
             // Creates an UICollectionViewLayoutItem with the frame and add it to the cache

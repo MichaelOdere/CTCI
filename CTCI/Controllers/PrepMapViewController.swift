@@ -13,19 +13,89 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
     var lastFrame:CGRect!
     var isAnimating = false
     
+    var currentSelectedDate:Date!
+    var currentDaysFromSelectedDate = 50000
+    var runningDays:Int = 0
+    
     @IBOutlet var collectionView: UICollectionView!
-    //    @IBOutlet var navBar: UINavigationItem!
     
     override func viewDidLoad() {
+        let defaults = UserDefaults.standard
+        let temp = defaults.object(forKey: "myStartDate")
+        
+        if temp != nil{
+            currentSelectedDate =  temp as! Date
 
+            let calendar = NSCalendar.current
+            
+            let date1 = calendar.startOfDay(for: currentSelectedDate)
+            let date2 = calendar.startOfDay(for: Date())
+            
+            let components = calendar.dateComponents([.day], from: date1, to: date2)
+            
+            if components.day! < 0{
+                currentDaysFromSelectedDate = 0
+                
+            }else{
+                currentDaysFromSelectedDate = components.day!
+                
+            }
+        }
+        
+        
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView?.contentInset = UIEdgeInsets(top: 23, left: 10, bottom: 10, right: 10)
 
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        let defaults = UserDefaults.standard
+        let temp = defaults.object(forKey: "myStartDate")
         
+        if temp != nil{
+            if currentSelectedDate != nil{
+                if currentSelectedDate != temp as? Date{
+                    print("Should reload")
+                    collectionView.reloadData()
+                }
+            }
+            currentSelectedDate =  temp as! Date
+
+            let calendar = NSCalendar.current
+
+            let date1 = calendar.startOfDay(for: currentSelectedDate)
+            let date2 = calendar.startOfDay(for: Date())
+            
+            let components = calendar.dateComponents([.day], from: date1, to: date2)
+            
+            if components.day! < 0{
+                currentDaysFromSelectedDate = 0
+
+            }else{
+                currentDaysFromSelectedDate = components.day!
+
+            }
+            print("curre ddays", currentDaysFromSelectedDate)
+        }
+        
+    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return test.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) else { return }
+        
+        let opactiyAnimation = CABasicAnimation(keyPath: "cornerRadius")
+        opactiyAnimation.fromValue = 15
+        cell.layer.cornerRadius = 15
+        opactiyAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+
+        opactiyAnimation.toValue = 10
+        opactiyAnimation.duration = 10
+        cell.layer.add(opactiyAnimation, forKey: opactiyAnimation.keyPath)
+        print(indexPath.row)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -37,15 +107,18 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
         
         isAnimating = true
         
+        var popUpView = UIView(frame: cell.layer.frame)
+        self.view.addSubview(popUpView)
         UIView.animate(withDuration: 0.2, animations: {
             
             let isShowing:Bool = cell.frame == collectionView.bounds ? true : false
             
             if isShowing{
-                cell.frame = self.lastFrame
                 collectionView.isScrollEnabled = true
-
+                collectionView.reloadItems(at: [indexPath])
             }else{
+                cell.layer.cornerRadius = 0
+
                 self.lastFrame = cell.frame
                 cell.frame = collectionView.bounds
                 collectionView.isScrollEnabled = false
@@ -61,6 +134,11 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
+        if indexPath.row == 0{
+            runningDays = 0
+        }
+        
+        var days = 60
         if isAnArrow(index: indexPath.item){
            
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ArrowCell", for: indexPath) as! HorizontalArrowCell
@@ -68,20 +146,41 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
             return cell
 
         }else{
+            
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ContentCell", for: indexPath) as! PrepMapContentCell
             
             cell.title.text = String(test[indexPath.row])
             
-            let num = 100
-            if num > 1{
-                cell.duration.text = " \(num) days"
+            if days > 1{
+                cell.duration.text = " \(days) days"
             }else{
-                cell.duration.text = " \(num) day"
+                cell.duration.text = " \(days) day"
             }
             
             cell.descriptionText.text = "this is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is ll"
             
             cell.sizeToFit()
+            cell.layer.cornerRadius = 15
+            cell.layer.masksToBounds = true
+            
+            cell.layer.shadowColor = UIColor.black.cgColor
+            cell.layer.shadowOpacity = 1
+            cell.layer.shadowOffset = CGSize.zero
+            cell.layer.shadowRadius = 10
+            cell.layer.masksToBounds = false
+            cell.layer.shouldRasterize = true
+            if runningDays < currentDaysFromSelectedDate{
+                if runningDays + days >= currentDaysFromSelectedDate{
+                    cell.backgroundColor = UIColor.blue
+
+                }else{
+                    cell.backgroundColor = UIColor.green
+                }
+            }else{
+                cell.backgroundColor = UIColor.red
+            }
+//            print(runningDays)
+            runningDays += days
             return cell
 
         }
@@ -132,49 +231,5 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
         
         return img
     }
-    
-//    func animateElements(){
-//        for cell in collectionView.visibleCells{
-//            print(cell.)
-//        }
-//    }
 }
-
-
-
-//    func animateCell(cell: UICollectionViewCell, index: Int) {
-//
-//        let showAnimation = CABasicAnimation(keyPath: "cornerRadius")
-//        showAnimation.fromValue = 200
-//        cell.layer.cornerRadius = 0
-//        showAnimation.toValue = 0
-//        showAnimation.beginTime =  CACurrentMediaTime() + (Double(index) *  0.5)
-//        showAnimation.duration = 1
-//
-//
-//        let opacityAnimation =  CABasicAnimation(keyPath: "opacity")
-//        opacityAnimation.fromValue = 0
-//        cell.layer.opacity = 1
-//        opacityAnimation.toValue = 1
-//        opacityAnimation.beginTime =  CACurrentMediaTime() + (Double(index) *  0.5)
-//        opacityAnimation.duration = 1
-//
-//        let showLayer = CALayer()
-//        let opacityLayer = CALayer()
-//
-////        showLayer.add(showAnimation, forKey: showAnimation.keyPath)
-////        showLayer.cornerRadius = 0
-////
-////        opacityLayer.add(opacityAnimation, forKey: opacityAnimation.keyPath)
-////        opacityLayer.opacity = 0
-//
-//        cell.layer.add(opacityAnimation, forKey: opacityAnimation.keyPath)
-////        cell.layer.addSublayer(showLayer)
-////        cell.layer.addSublayer(opacityLayer)
-//    }
-
-//    func animateCellAtIndexPath(indexPath: IndexPath) {
-//        guard let cell = collectionView.cellForItem(at: indexPath) else { return }
-//        animateCell(cell: cell, index: indexPath.item)
-//    }
-
+ 

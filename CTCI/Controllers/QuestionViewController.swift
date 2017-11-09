@@ -32,6 +32,7 @@ class QuestionViewController: UITableViewController{
         
         let image = UIImage(named: questionTopic.imageName)
         cell.imageView?.image = image
+        
         return cell
     }
 }
