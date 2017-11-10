@@ -10,6 +10,7 @@ import UIKit
 
 class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate{
     let test = Array(0...29)
+    var popUpView:PrepMapView!
     var lastFrame:CGRect!
     var isAnimating = false
     
@@ -42,6 +43,7 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
             }
         }
         
+        initializePopUpView()
         
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -76,7 +78,7 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
                 currentDaysFromSelectedDate = components.day!
 
             }
-            print("curre ddays", currentDaysFromSelectedDate)
+
         }
         
     }
@@ -84,52 +86,13 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
         return test.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) else { return }
-        
-        let opactiyAnimation = CABasicAnimation(keyPath: "cornerRadius")
-        opactiyAnimation.fromValue = 15
-        cell.layer.cornerRadius = 15
-        opactiyAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
-
-        opactiyAnimation.toValue = 10
-        opactiyAnimation.duration = 10
-        cell.layer.add(opactiyAnimation, forKey: opactiyAnimation.keyPath)
-        print(indexPath.row)
-    }
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         if isAnArrow(index: indexPath.item ) || isAnimating{
             return
         }
-        guard let cell = collectionView.cellForItem(at: indexPath) else { return }
-        
-        isAnimating = true
-        
-        var popUpView = UIView(frame: cell.layer.frame)
-        self.view.addSubview(popUpView)
-        UIView.animate(withDuration: 0.2, animations: {
-            
-            let isShowing:Bool = cell.frame == collectionView.bounds ? true : false
-            
-            if isShowing{
-                collectionView.isScrollEnabled = true
-                collectionView.reloadItems(at: [indexPath])
-            }else{
-                cell.layer.cornerRadius = 0
-
-                self.lastFrame = cell.frame
-                cell.frame = collectionView.bounds
-                collectionView.isScrollEnabled = false
-                cell.superview?.bringSubview(toFront: cell)
-            }
-
-            
-        },completion:{ (finished: Bool) in
-            self.isAnimating = false
-        })
-        
+        guard let cell = collectionView.cellForItem(at: indexPath) as? PrepMapContentCell else { return }
+        addPopUpView(cell: cell)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -138,7 +101,7 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
             runningDays = 0
         }
         
-        var days = 60
+        let days = 60
         if isAnArrow(index: indexPath.item){
            
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ArrowCell", for: indexPath) as! HorizontalArrowCell
@@ -148,38 +111,42 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
         }else{
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ContentCell", for: indexPath) as! PrepMapContentCell
-            
-            cell.title.text = String(test[indexPath.row])
+            let cellView = cell.view as! PrepMapView
+            cellView.title.text = String(test[indexPath.row])
             
             if days > 1{
-                cell.duration.text = " \(days) days"
+                cellView.duration.text = " \(days) days"
             }else{
-                cell.duration.text = " \(days) day"
+                cellView.duration.text = " \(days) day"
             }
             
-            cell.descriptionText.text = "this is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is ll"
+            cellView.descriptionText.text = "this is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is ll"
             
             cell.sizeToFit()
             cell.layer.cornerRadius = 15
-            cell.layer.masksToBounds = true
             
             cell.layer.shadowColor = UIColor.black.cgColor
             cell.layer.shadowOpacity = 1
             cell.layer.shadowOffset = CGSize.zero
             cell.layer.shadowRadius = 10
-            cell.layer.masksToBounds = false
+            cell.layer.masksToBounds = true
             cell.layer.shouldRasterize = true
+            
+            print("runningDays \(runningDays)")
+            print("currentDaysFromSelectedDate \(currentDaysFromSelectedDate)")
+            print("days \(days)")
+
             if runningDays < currentDaysFromSelectedDate{
                 if runningDays + days >= currentDaysFromSelectedDate{
-                    cell.backgroundColor = UIColor.blue
+                    cellView.backgroundColor = UIColor.blue
 
                 }else{
-                    cell.backgroundColor = UIColor.green
+                    cellView.backgroundColor = UIColor.green
                 }
             }else{
-                cell.backgroundColor = UIColor.red
+                cellView.backgroundColor = UIColor.red
             }
-//            print(runningDays)
+
             runningDays += days
             return cell
 
@@ -231,5 +198,89 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
         
         return img
     }
+    
+    @objc func removePopUp(sender: UITapGestureRecognizer? = nil) {
+        self.isAnimating = true
+        UIView.animate(withDuration: 1.0, animations: {
+            self.popUpView.frame = self.lastFrame
+            self.popUpView.layer.cornerRadius = 15
+            self.popUpView.descriptionText.frame = CGRect(x: 0, y: 0, width: self.popUpView.layer.frame.width, height: 200)
+
+        },completion:{ (finished: Bool) in
+            self.isAnimating = false
+            self.popUpView.removeFromSuperview()
+        })
+    }
+    
+    func addPopUpView(cell: PrepMapContentCell){
+        
+        isAnimating = true
+        
+        lastFrame =  cell.superview?.convert(cell.frame, to: self.view)
+        popUpView.frame = lastFrame
+        
+        popUpView.backgroundColor = cell.view.backgroundColor
+        
+        let cellView = cell.view as! PrepMapView
+        popUpView.title.text = cellView.title.text
+        popUpView.descriptionText.text = cellView.descriptionText.text
+        popUpView.duration.text = cellView.duration.text
+        
+        self.view.addSubview(popUpView)
+        UIView.animate(withDuration: 1.0, animations: {
+            self.popUpView.frame = self.view.frame
+            self.popUpView.layer.cornerRadius = 0
+            self.popUpView.descriptionText.frame = CGRect(x: 0, y: 0, width: self.popUpView.layer.frame.width, height: 200)
+            
+        },completion:{ (finished: Bool) in
+            self.isAnimating = false
+        })
+        
+    }
+    
+    func initializePopUpView(){
+        
+        popUpView = PrepMapView()
+        let title = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        let description = UILabel(frame: CGRect(x: 0, y: 0, width: popUpView.layer.frame.width, height: 200))
+        let duration = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+    
+        popUpView.addSubview(title)
+        popUpView.addSubview(description)
+        popUpView.addSubview(duration)
+
+        popUpView.title = title
+        popUpView.descriptionText = description
+        popUpView.duration = duration
+
+        popUpView.layer.cornerRadius = 15
+        popUpView.layer.shadowColor = UIColor.black.cgColor
+        popUpView.layer.shadowOpacity = 1
+        popUpView.layer.shadowOffset = CGSize.zero
+        popUpView.layer.shadowRadius = 10
+        popUpView.layer.masksToBounds = false
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.removePopUp(sender:)))
+        popUpView.addGestureRecognizer(tapGestureRecognizer)
+    }
 }
- 
+
+
+/*
+
+func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+    guard let cell = collectionView.cellForItem(at: indexPath) else { return }
+    
+    let opactiyAnimation = CABasicAnimation(keyPath: "cornerRadius")
+    opactiyAnimation.fromValue = 15
+    cell.layer.cornerRadius = 15
+    opactiyAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+    
+    opactiyAnimation.toValue = 10
+    opactiyAnimation.duration = 10
+    cell.layer.add(opactiyAnimation, forKey: opactiyAnimation.keyPath)
+    print(indexPath.row)
+}
+
+
+ */
