@@ -18,6 +18,8 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
     var currentDaysFromSelectedDate = 50000
     var runningDays:Int = 0
     
+    var titleTop:NSLayoutConstraint!
+    
     @IBOutlet var collectionView: UICollectionView!
     
     override func viewDidLoad() {
@@ -201,10 +203,17 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
     
     @objc func removePopUp(sender: UITapGestureRecognizer? = nil) {
         self.isAnimating = true
+        self.popUpView.duration.font = self.popUpView.duration.font.withSize(10.0)
+
         UIView.animate(withDuration: 1.0, animations: {
             self.popUpView.frame = self.lastFrame
+//            self.popUpView.title.frame = CGRect(x: 10, y: 0, width: 54, height: 27)
+            self.popUpView.title.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+
+           self.titleTop.constant = 0
+
             self.popUpView.layer.cornerRadius = 15
-            self.popUpView.descriptionText.frame = CGRect(x: 0, y: 0, width: self.popUpView.layer.frame.width, height: 200)
+            self.view.layoutIfNeeded()
 
         },completion:{ (finished: Bool) in
             self.isAnimating = false
@@ -213,24 +222,31 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
     }
     
     func addPopUpView(cell: PrepMapContentCell){
-        
+        if isAnimating{
+            return
+        }
         isAnimating = true
         
         lastFrame =  cell.superview?.convert(cell.frame, to: self.view)
         popUpView.frame = lastFrame
-        
         popUpView.backgroundColor = cell.view.backgroundColor
         
         let cellView = cell.view as! PrepMapView
         popUpView.title.text = cellView.title.text
         popUpView.descriptionText.text = cellView.descriptionText.text
         popUpView.duration.text = cellView.duration.text
-        
+        self.popUpView.duration.font = self.popUpView.duration.font.withSize(10.0)
+
         self.view.addSubview(popUpView)
         UIView.animate(withDuration: 1.0, animations: {
-            self.popUpView.frame = self.view.frame
+            self.popUpView.frame = self.collectionView.frame
+//            self.popUpView.title.frame = CGRect(x: 10, y: 0, width: self.collectionView.frame.width, height: 27)
+            self.popUpView.title.transform = CGAffineTransform(scaleX: 4.0, y: 4.0)
+
+           self.titleTop.constant = 40
+            
             self.popUpView.layer.cornerRadius = 0
-            self.popUpView.descriptionText.frame = CGRect(x: 0, y: 0, width: self.popUpView.layer.frame.width, height: 200)
+            self.view.layoutIfNeeded()
             
         },completion:{ (finished: Bool) in
             self.isAnimating = false
@@ -241,24 +257,54 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
     func initializePopUpView(){
         
         popUpView = PrepMapView()
-        let title = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-        let description = UILabel(frame: CGRect(x: 0, y: 0, width: popUpView.layer.frame.width, height: 200))
-        let duration = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        let title = UILabel(frame: CGRect(x: 10, y: 0, width: 54, height: 27))
+        let descriptionText = UILabel(frame: CGRect(x: 0, y: 34, width:75, height: 44))
+        let duration = UILabel(frame: CGRect(x: 30, y: 86, width: 43, height: 12))
     
+        descriptionText.numberOfLines = 10
+        
         popUpView.addSubview(title)
-        popUpView.addSubview(description)
+        popUpView.addSubview(descriptionText)
         popUpView.addSubview(duration)
+       
 
+        title.translatesAutoresizingMaskIntoConstraints = false
+        duration.translatesAutoresizingMaskIntoConstraints = false
+
+        let titleCenterX = NSLayoutConstraint(item: title, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: popUpView, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0)
+        titleCenterX.isActive = true
+        
+        titleTop = NSLayoutConstraint(item: title, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.greaterThanOrEqual, toItem: popUpView, attribute: NSLayoutAttribute.top, multiplier: 1, constant: 0)
+        
+        titleTop.isActive = true
+//        let titleBottom = NSLayoutConstraint(item: title, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.equal, toItem: popUpView, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: 0)
+//        titleBottom.isActive = true
+//        let descriptionCenterX = NSLayoutConstraint(item: descriptionText, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: popUpView, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0)
+//        let descriptionHeight = NSLayoutConstraint(item: descriptionText, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.lessThanOrEqual, toItem: popUpView, attribute: NSLayoutAttribute.height, multiplier: 1, constant: -200)
+//
+        let durationBottom = NSLayoutConstraint(item: duration, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.equal, toItem: popUpView, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: -2)
+        durationBottom.isActive = true
+        let durationRight = NSLayoutConstraint(item: duration, attribute: NSLayoutAttribute.right, relatedBy: NSLayoutRelation.equal, toItem: popUpView, attribute: NSLayoutAttribute.right, multiplier: 1, constant: -2)
+        durationRight.isActive = true
+//
+//        NSLayoutConstraint.activate([titleCenterX, titleTop, durationBottom, durationRight]) //, verticalConstraint, widthConstraint, heightConstraint])
+
+//        let titleTopConstraint = NSLayoutConstraint(
+        
+        
         popUpView.title = title
-        popUpView.descriptionText = description
+        popUpView.descriptionText = descriptionText
         popUpView.duration = duration
+     
+        self.popUpView.title.font = self.popUpView.title.font.withSize(22.0)
+        self.popUpView.duration.font = self.popUpView.duration.font.withSize(10.0)
 
         popUpView.layer.cornerRadius = 15
         popUpView.layer.shadowColor = UIColor.black.cgColor
         popUpView.layer.shadowOpacity = 1
         popUpView.layer.shadowOffset = CGSize.zero
         popUpView.layer.shadowRadius = 10
-        popUpView.layer.masksToBounds = false
+        popUpView.layer.masksToBounds = true
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.removePopUp(sender:)))
         popUpView.addGestureRecognizer(tapGestureRecognizer)
