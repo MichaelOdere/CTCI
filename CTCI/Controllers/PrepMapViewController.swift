@@ -118,7 +118,7 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
         if isAnArrow(index: indexPath.item){
            
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ArrowCell", for: indexPath) as! HorizontalArrowCell
-            cell.arrowImage.image = getImage(index: indexPath.item)
+            cell.arrowImage.image = cell.getImage(index: indexPath.item)
             return cell
 
         }else{
@@ -127,23 +127,10 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
             let cellView = cell.view as! PrepMapView
             cellView.title.text = String(test[indexPath.row])
             
-            if days > 1{
-                cellView.duration.text = " \(days) days"
-            }else{
-                cellView.duration.text = " \(days) day"
-            }
+           cellView.duration.text = cell.daysText(days: days)
             
             cellView.descriptionText.text = "this is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is ll"
             
-            cell.sizeToFit()
-            cell.layer.cornerRadius = 15
-            
-            cell.layer.shadowColor = UIColor.black.cgColor
-            cell.layer.shadowOpacity = 1
-            cell.layer.shadowOffset = CGSize.zero
-            cell.layer.shadowRadius = 10
-            cell.layer.masksToBounds = true
-            cell.layer.shouldRasterize = true
             
             print("runningDays \(runningDays)")
             print("currentDaysFromSelectedDate \(currentDaysFromSelectedDate)")
@@ -189,51 +176,7 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
             }
         }
     }
-    
-    // C = Content
-    // A = Arrow
-    // [C, A, C, A, C, A, A, C, A, C, A, C, A, A]
-    
-    // This function returns the (A)rrow index's
-    func isAnArrow(index: Int)->Bool{
-        if (index % 7) % 2 == 1 || index % 7 == 6{
-            return true
-        }
-        
-        return false
-    }
-    
-    // There are 3 Image directions (Right, Left, Down) and one nil case to decipher
-    // nil is used for no image
-    // [C, right, C, right, C, Down, nil, C, Left, C, Left, C, nil, Down]
-    // Returns the correct IMage
-    func getImage(index: Int)->UIImage?{
-        let mod_7 = index % 7
-        let mod_14 = index % 14
-        let isLeft = mod_14 > 7
-        
-        // Right Case
-        var img = UIImage(named: "arrow")
 
-        // Down or Nil Case
-        if mod_7 >= 5{
-            // If it is the 5th spot AND the direction is right OR if it is the 6th spot AND the direction is left
-            if mod_7 == 5 && !isLeft ||  mod_7 == 6 && isLeft{
-                img = UIImage(cgImage: (img?.cgImage)!, scale: 1, orientation: .right)
-            }
-            // Opposite of the cases above
-            else{
-                img = nil
-            }
-        }
-            
-        // Left Case
-        else if isLeft{
-            img = UIImage(cgImage: (img?.cgImage)!, scale: 1, orientation: .down)
-        }
-        
-        return img
-    }
     
     @objc func removePopUp(sender: UITapGestureRecognizer? = nil) {
         self.isAnimating = true
@@ -323,19 +266,30 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
         self.popUpView.descriptionText.font = self.popUpView.descriptionText.font.withSize(14.0)
         self.popUpView.duration.font = self.popUpView.duration.font.withSize(10.0)
 
-        popUpView.layer.cornerRadius = 15
-        popUpView.layer.shadowColor = UIColor.black.cgColor
-        popUpView.layer.shadowOpacity = 1
-        popUpView.layer.shadowOffset = CGSize.zero
-        popUpView.layer.shadowRadius = 10
-        popUpView.layer.masksToBounds = true
+//        popUpView.layer.cornerRadius = 15
+//        popUpView.layer.shadowColor = UIColor.black.cgColor
+//        popUpView.layer.shadowOpacity = 1
+//        popUpView.layer.shadowOffset = CGSize.zero
+//        popUpView.layer.shadowRadius = 10
+//        popUpView.layer.masksToBounds = true
 
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.removePopUp(sender:)))
         popUpView.addGestureRecognizer(tapGestureRecognizer)
     }
     
     
-
+    // C = Content
+    // A = Arrow
+    // [C, A, C, A, C, A, A, C, A, C, A, C, A, A]
+    
+    // This function returns the (A)rrow index's
+    func isAnArrow(index: Int)->Bool{
+        if (index % 7) % 2 == 1 || index % 7 == 6{
+            return true
+        }
+        
+        return false
+    }
 }
 
 
