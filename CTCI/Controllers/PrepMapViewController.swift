@@ -13,7 +13,8 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
     var popUpView:PrepMapView!
     var lastFrame:CGRect!
     var isAnimating = false
-    
+    var hasInitialized = false
+
     var currentSelectedDate:Date!
     var currentDaysFromSelectedDate = 50000
     var runningDays:Int = 0
@@ -60,8 +61,9 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
         if temp != nil{
             if currentSelectedDate != nil{
                 if currentSelectedDate != temp as? Date{
-                    print("Should reload")
-                    collectionView.reloadData()
+                    collectionView.reloadData{
+                        self.reloadAnimation()
+                    }
                 }
             }
             currentSelectedDate =  temp as! Date
@@ -83,12 +85,20 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
 
         }
         
+        if !hasInitialized{
+            self.reloadAnimation()
+            hasInitialized = true
+        }
+        
+        
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return test.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+//        collectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
         
         if isAnArrow(index: indexPath.item ) || isAnimating{
             return
@@ -99,6 +109,7 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
+        print(indexPath.row)
         if indexPath.row == 0{
             runningDays = 0
         }
@@ -148,12 +159,35 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
             }else{
                 cellView.backgroundColor = UIColor.red
             }
-
             runningDays += days
+            
             return cell
 
         }
         
+    }
+    
+    func reloadAnimation(){
+        print("animating....")
+        var delay:Double = 0.0
+        var paths = collectionView.indexPathsForVisibleItems
+        paths = paths.sorted(by: {$0.row < $1.row})
+        for indexPath in paths{
+
+            if let cell = collectionView.cellForItem(at: indexPath) as? PrepMapContentCell{
+                cell.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                cell.view.backgroundColor = UIColor.red
+
+                UIView.animate(withDuration: 0.3, delay: 0.05 * delay, options: .curveEaseIn, animations: {
+                    cell.view.backgroundColor = UIColor.green
+                    cell.transform = CGAffineTransform(scaleX: 4.0, y: 4.0)
+                    cell.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+
+                })
+
+                delay += 1
+            }
+        }
     }
     
     // C = Content
@@ -203,14 +237,12 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
     
     @objc func removePopUp(sender: UITapGestureRecognizer? = nil) {
         self.isAnimating = true
-        self.popUpView.duration.font = self.popUpView.duration.font.withSize(10.0)
 
-        UIView.animate(withDuration: 1.0, animations: {
+        UIView.animate(withDuration: 0.3, animations: {
             self.popUpView.frame = self.lastFrame
-//            self.popUpView.title.frame = CGRect(x: 10, y: 0, width: 54, height: 27)
             self.popUpView.title.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
 
-           self.titleTop.constant = 0
+            self.titleTop.constant = 0
 
             self.popUpView.layer.cornerRadius = 15
             self.view.layoutIfNeeded()
@@ -235,15 +267,14 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
         popUpView.title.text = cellView.title.text
         popUpView.descriptionText.text = cellView.descriptionText.text
         popUpView.duration.text = cellView.duration.text
-        self.popUpView.duration.font = self.popUpView.duration.font.withSize(10.0)
-
+        
         self.view.addSubview(popUpView)
-        UIView.animate(withDuration: 1.0, animations: {
+        UIView.animate(withDuration: 0.3, animations: {
             self.popUpView.frame = self.collectionView.frame
-//            self.popUpView.title.frame = CGRect(x: 10, y: 0, width: self.collectionView.frame.width, height: 27)
-            self.popUpView.title.transform = CGAffineTransform(scaleX: 4.0, y: 4.0)
-
-           self.titleTop.constant = 40
+//            self.popUpView.title.transform = CGAffineTransform(scaleX: 4.0, y: 4.0)
+            self.popUpView.title.bounds = CGRect(x: 0, y: 0, width: cellView.title.frame.width * 3, height: cellView.title.frame.height * 3)
+            self.popUpView.title.font = self.popUpView.title.font.withSize(100)
+            self.titleTop.constant = 0
             
             self.popUpView.layer.cornerRadius = 0
             self.view.layoutIfNeeded()
@@ -256,19 +287,19 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
     
     func initializePopUpView(){
         
-        popUpView = PrepMapView()
+        popUpView = PrepMapView(frame: CGRect(x: 0, y: 0, width: 75, height: 100))
         let title = UILabel(frame: CGRect(x: 10, y: 0, width: 54, height: 27))
         let descriptionText = UILabel(frame: CGRect(x: 0, y: 34, width:75, height: 44))
         let duration = UILabel(frame: CGRect(x: 30, y: 86, width: 43, height: 12))
     
-        descriptionText.numberOfLines = 10
+        descriptionText.numberOfLines = 8
         
         popUpView.addSubview(title)
         popUpView.addSubview(descriptionText)
         popUpView.addSubview(duration)
        
-
         title.translatesAutoresizingMaskIntoConstraints = false
+//        descriptionText.translatesAutoresizingMaskIntoConstraints = false
         duration.translatesAutoresizingMaskIntoConstraints = false
 
         let titleCenterX = NSLayoutConstraint(item: title, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: popUpView, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0)
@@ -277,26 +308,19 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
         titleTop = NSLayoutConstraint(item: title, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.greaterThanOrEqual, toItem: popUpView, attribute: NSLayoutAttribute.top, multiplier: 1, constant: 0)
         
         titleTop.isActive = true
-//        let titleBottom = NSLayoutConstraint(item: title, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.equal, toItem: popUpView, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: 0)
-//        titleBottom.isActive = true
-//        let descriptionCenterX = NSLayoutConstraint(item: descriptionText, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: popUpView, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0)
-//        let descriptionHeight = NSLayoutConstraint(item: descriptionText, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.lessThanOrEqual, toItem: popUpView, attribute: NSLayoutAttribute.height, multiplier: 1, constant: -200)
 //
         let durationBottom = NSLayoutConstraint(item: duration, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.equal, toItem: popUpView, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: -2)
         durationBottom.isActive = true
         let durationRight = NSLayoutConstraint(item: duration, attribute: NSLayoutAttribute.right, relatedBy: NSLayoutRelation.equal, toItem: popUpView, attribute: NSLayoutAttribute.right, multiplier: 1, constant: -2)
         durationRight.isActive = true
-//
-//        NSLayoutConstraint.activate([titleCenterX, titleTop, durationBottom, durationRight]) //, verticalConstraint, widthConstraint, heightConstraint])
 
-//        let titleTopConstraint = NSLayoutConstraint(
-        
-        
         popUpView.title = title
         popUpView.descriptionText = descriptionText
         popUpView.duration = duration
-     
+        self.popUpView.frame = self.collectionView.frame
+
         self.popUpView.title.font = self.popUpView.title.font.withSize(22.0)
+        self.popUpView.descriptionText.font = self.popUpView.descriptionText.font.withSize(14.0)
         self.popUpView.duration.font = self.popUpView.duration.font.withSize(10.0)
 
         popUpView.layer.cornerRadius = 15
@@ -305,13 +329,22 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
         popUpView.layer.shadowOffset = CGSize.zero
         popUpView.layer.shadowRadius = 10
         popUpView.layer.masksToBounds = true
-        
+
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.removePopUp(sender:)))
         popUpView.addGestureRecognizer(tapGestureRecognizer)
     }
+    
+    
+
 }
 
 
+extension UICollectionView {
+    func reloadData(completion: @escaping ()->()) {
+        UIView.animate(withDuration: 0, animations: { self.reloadData() })
+        { _ in completion() }
+    }
+}
 /*
 
 func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {

@@ -12,6 +12,7 @@ class PrepMapContentCell:UICollectionViewCell{
    
     @IBOutlet var view: PrepMapView!
 
+    
 }
 
 
