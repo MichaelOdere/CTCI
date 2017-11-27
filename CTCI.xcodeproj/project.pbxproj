@@ -27,6 +27,8 @@
 		F99FBE181F945C50001F6C20 /* TopicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99FBE171F945C50001F6C20 /* TopicCell.swift */; };
 		F9A24F801FB56CB900D095CE /* PrepMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A24F7F1FB56CB900D095CE /* PrepMapView.swift */; };
 		F9BCE2E91FA315610089BB27 /* MyDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BCE2E81FA315610089BB27 /* MyDateViewController.swift */; };
+		F9CFC2E61FCCA8D700B12F2C /* Milestone.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CFC2E51FCCA8D700B12F2C /* Milestone.swift */; };
+		F9CFC2E81FCCB1A100B12F2C /* MilestoneStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CFC2E71FCCB1A100B12F2C /* MilestoneStore.swift */; };
 		F9DE606F1F9B9DD400C7D85D /* StudyTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DE606E1F9B9DD400C7D85D /* StudyTopic.swift */; };
 		F9DE60711F9B9E0400C7D85D /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DE60701F9B9E0400C7D85D /* Note.swift */; };
 /* End PBXBuildFile section */
@@ -54,6 +56,8 @@
 		F99FBE171F945C50001F6C20 /* TopicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCell.swift; sourceTree = "<group>"; };
 		F9A24F7F1FB56CB900D095CE /* PrepMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PrepMapView.swift; path = CTCI/Controllers/PrepMapView.swift; sourceTree = SOURCE_ROOT; };
 		F9BCE2E81FA315610089BB27 /* MyDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDateViewController.swift; sourceTree = "<group>"; };
+		F9CFC2E51FCCA8D700B12F2C /* Milestone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Milestone.swift; sourceTree = "<group>"; };
+		F9CFC2E71FCCB1A100B12F2C /* MilestoneStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneStore.swift; sourceTree = "<group>"; };
 		F9DE606E1F9B9DD400C7D85D /* StudyTopic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyTopic.swift; sourceTree = "<group>"; };
 		F9DE60701F9B9E0400C7D85D /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -86,6 +90,7 @@
 			children = (
 				F99FBE131F943112001F6C20 /* StudyStore.swift */,
 				F924A9B61F9D6C6300B5496C /* QuestionStore.swift */,
+				F9CFC2E71FCCB1A100B12F2C /* MilestoneStore.swift */,
 			);
 			path = Stores;
 			sourceTree = "<group>";
@@ -98,6 +103,7 @@
 				F9DE60701F9B9E0400C7D85D /* Note.swift */,
 				F99245121F9D5ABC00CB61D8 /* QuestionTopic.swift */,
 				F924A9B91F9D6D4F00B5496C /* Question.swift */,
+				F9CFC2E51FCCA8D700B12F2C /* Milestone.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -227,6 +233,7 @@
 				F99FBE141F943112001F6C20 /* StudyStore.swift in Sources */,
 				F9BCE2E91FA315610089BB27 /* MyDateViewController.swift in Sources */,
 				F99245131F9D5ABC00CB61D8 /* QuestionTopic.swift in Sources */,
+				F9CFC2E81FCCB1A100B12F2C /* MilestoneStore.swift in Sources */,
 				F99FBE181F945C50001F6C20 /* TopicCell.swift in Sources */,
 				F99FBDFC1F94205F001F6C20 /* AppDelegate.swift in Sources */,
 				F90882351F9AC7D2002B4AAA /* StudyViewController.swift in Sources */,
@@ -237,6 +244,7 @@
 				F992450F1F9D221C00CB61D8 /* NotesViewController.swift in Sources */,
 				F99245151F9D5CF000CB61D8 /* QuestionViewController.swift in Sources */,
 				F9DE606F1F9B9DD400C7D85D /* StudyTopic.swift in Sources */,
+				F9CFC2E61FCCA8D700B12F2C /* Milestone.swift in Sources */,
 				F98871FB1FA2A263009E4AEA /* PrepMapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

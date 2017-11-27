@@ -9,7 +9,7 @@
 import UIKit
 
 class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate{
-    let test = Array(0...29)
+    var milestoneStore:MilestoneStore!
     var popUpView:PrepMapView!
     var lastFrame:CGRect!
     var isAnimating = false
@@ -17,7 +17,6 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
 
     var currentSelectedDate:Date!
     var currentDaysFromSelectedDate = 50000
-    var runningDays:Int = 0
     
     var titleTop:NSLayoutConstraint!
     
@@ -47,7 +46,7 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
         }
         
         initializePopUpView()
-        
+        milestoneStore = MilestoneStore()
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView?.contentInset = UIEdgeInsets(top: 23, left: 10, bottom: 10, right: 10)
@@ -61,15 +60,20 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
         if temp != nil{
             if currentSelectedDate != nil{
                 if currentSelectedDate != temp as? Date{
-                    collectionView.reloadData{
+
+                    self.collectionView.reloadData{
                         self.reloadAnimation()
                     }
+                    
+//                    self.updateCollectionViewColors {
+//                        print("Done!")
+//                    }
                 }
             }
             currentSelectedDate =  temp as! Date
 
             let calendar = NSCalendar.current
-
+            
             let date1 = calendar.startOfDay(for: currentSelectedDate)
             let date2 = calendar.startOfDay(for: Date())
             
@@ -93,14 +97,12 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
         
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return test.count
+        return milestoneStore.prepMap.count
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-//        collectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
-        
-        if isAnArrow(index: indexPath.item ) || isAnimating{
+        if milestoneStore.isAnArrow(index: indexPath.item ) || isAnimating{
             return
         }
         guard let cell = collectionView.cellForItem(at: indexPath) as? PrepMapContentCell else { return }
@@ -108,45 +110,23 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
-        print(indexPath.row)
-        if indexPath.row == 0{
-            runningDays = 0
-        }
         
-        let days = 60
-        if isAnArrow(index: indexPath.item){
+        if milestoneStore.isAnArrow(index: indexPath.item){
            
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ArrowCell", for: indexPath) as! HorizontalArrowCell
             cell.arrowImage.image = cell.getImage(index: indexPath.item)
             return cell
 
         }else{
-            
+
+            let milestone = milestoneStore.prepMap[indexPath.row]
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ContentCell", for: indexPath) as! PrepMapContentCell
             let cellView = cell.view as! PrepMapView
-            cellView.title.text = String(test[indexPath.row])
-            
-           cellView.duration.text = cell.daysText(days: days)
-            
-            cellView.descriptionText.text = "this is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is llthis is ll"
-            
-            
-            print("runningDays \(runningDays)")
-            print("currentDaysFromSelectedDate \(currentDaysFromSelectedDate)")
-            print("days \(days)")
+            cellView.title.text = milestone.title
+            cellView.duration.text = String(milestone.days)
+            cellView.descriptionText.text = milestone.desc
 
-            if runningDays < currentDaysFromSelectedDate{
-                if runningDays + days >= currentDaysFromSelectedDate{
-                    cellView.backgroundColor = UIColor.blue
-
-                }else{
-                    cellView.backgroundColor = UIColor.green
-                }
-            }else{
-                cellView.backgroundColor = UIColor.red
-            }
-            runningDays += days
+            cellView.backgroundColor = milestoneStore.cellColor(milestone: milestone, currentDaysFromSelectedDate: currentDaysFromSelectedDate)
             
             return cell
 
@@ -163,10 +143,11 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
 
             if let cell = collectionView.cellForItem(at: indexPath) as? PrepMapContentCell{
                 cell.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                let tempColor = cell.view.backgroundColor
                 cell.view.backgroundColor = UIColor.red
 
                 UIView.animate(withDuration: 0.3, delay: 0.05 * delay, options: .curveEaseIn, animations: {
-                    cell.view.backgroundColor = UIColor.green
+                    cell.view.backgroundColor = tempColor
                     cell.transform = CGAffineTransform(scaleX: 4.0, y: 4.0)
                     cell.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
 
@@ -214,7 +195,6 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
         self.view.addSubview(popUpView)
         UIView.animate(withDuration: 0.3, animations: {
             self.popUpView.frame = self.collectionView.frame
-//            self.popUpView.title.transform = CGAffineTransform(scaleX: 4.0, y: 4.0)
             self.popUpView.title.bounds = CGRect(x: 0, y: 0, width: cellView.title.frame.width * 3, height: cellView.title.frame.height * 3)
             self.popUpView.title.font = self.popUpView.title.font.withSize(100)
             self.titleTop.constant = 0
@@ -266,30 +246,11 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
         self.popUpView.descriptionText.font = self.popUpView.descriptionText.font.withSize(14.0)
         self.popUpView.duration.font = self.popUpView.duration.font.withSize(10.0)
 
-//        popUpView.layer.cornerRadius = 15
-//        popUpView.layer.shadowColor = UIColor.black.cgColor
-//        popUpView.layer.shadowOpacity = 1
-//        popUpView.layer.shadowOffset = CGSize.zero
-//        popUpView.layer.shadowRadius = 10
-//        popUpView.layer.masksToBounds = true
-
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.removePopUp(sender:)))
         popUpView.addGestureRecognizer(tapGestureRecognizer)
     }
+
     
-    
-    // C = Content
-    // A = Arrow
-    // [C, A, C, A, C, A, A, C, A, C, A, C, A, A]
-    
-    // This function returns the (A)rrow index's
-    func isAnArrow(index: Int)->Bool{
-        if (index % 7) % 2 == 1 || index % 7 == 6{
-            return true
-        }
-        
-        return false
-    }
 }
 
 
@@ -299,21 +260,4 @@ extension UICollectionView {
         { _ in completion() }
     }
 }
-/*
 
-func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-    guard let cell = collectionView.cellForItem(at: indexPath) else { return }
-    
-    let opactiyAnimation = CABasicAnimation(keyPath: "cornerRadius")
-    opactiyAnimation.fromValue = 15
-    cell.layer.cornerRadius = 15
-    opactiyAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
-    
-    opactiyAnimation.toValue = 10
-    opactiyAnimation.duration = 10
-    cell.layer.add(opactiyAnimation, forKey: opactiyAnimation.keyPath)
-    print(indexPath.row)
-}
-
-
- */

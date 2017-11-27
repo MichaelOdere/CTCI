@@ -28,7 +28,21 @@ class PrepMapContentCell:UICollectionViewCell{
         }
     }
     
-
+    func cellColor(days: Int, runningDays: Int, currentDaysFromSelectedDate: Int)->UIColor{
+        
+        var color = UIColor.red
+        
+        if runningDays <= currentDaysFromSelectedDate{
+            if runningDays + days >= currentDaysFromSelectedDate{
+                color = UIColor.blue
+                
+            }else{
+               color = UIColor.green
+            }
+        }
+        
+        return color
+    }
 }
 
 

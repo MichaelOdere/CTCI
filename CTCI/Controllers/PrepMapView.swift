@@ -15,7 +15,6 @@ class PrepMapView: UIView {
     @IBOutlet var descriptionText: UILabel!
     
     override init(frame: CGRect) {
-        print("init")
         super.init(frame: frame)
         
         self.layer.cornerRadius = 15
