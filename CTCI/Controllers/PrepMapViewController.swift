@@ -1,11 +1,3 @@
-//
-//  MapViewController.swift
-//  CTCI
-//
-//  Created by Michael Odere on 10/26/17.
-//  Copyright © 2017 Michael Odere. All rights reserved.
-//
-
 import UIKit
 
 class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate{
@@ -14,7 +6,8 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
     var lastFrame:CGRect!
     var isAnimating = false
     var hasInitialized = false
-
+    let scaler = 20
+    
     var currentSelectedDate:Date!
     var currentDaysFromSelectedDate = 50000
     
@@ -50,6 +43,8 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView?.contentInset = UIEdgeInsets(top: 23, left: 10, bottom: 10, right: 10)
+//        collectionView.backgroundColor = UIColor(red:169/255, green:183/255, blue:192/255, alpha:1.0)
+
 
     }
     
@@ -162,16 +157,34 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
     @objc func removePopUp(sender: UITapGestureRecognizer? = nil) {
         self.isAnimating = true
 
+//        self.popUpView.title.font =  self.popUpView.title.font.withSize(20)
+        let labelCopy = self.popUpView.title.copyLabel()
+        var smallerBounds = labelCopy.bounds
+        labelCopy.font = self.popUpView.title.font.withSize(22)
+        smallerBounds.size = labelCopy.intrinsicContentSize
+        
+        let shrinkTransform = scaleTransform(from: self.popUpView.title.bounds.size, to: smallerBounds.size)
+        
+        
         UIView.animate(withDuration: 0.3, animations: {
+            print("12222222")
+            print(self.popUpView.title.frame)
             self.popUpView.frame = self.lastFrame
-            self.popUpView.title.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+//            self.popUpView.title.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+            self.popUpView.title.transform = shrinkTransform
 
-            self.titleTop.constant = 0
+//            self.popUpView.title.font = self.popUpView.title.font.withSize(22)
+//            self.popUpView.title.transform =  .identity //CGAffineTransform(scaleX: CGFloat(1/self.scaler), y: CGFloat(1/self.scaler))
+
+            self.titleTop.constant = -50
 
             self.popUpView.layer.cornerRadius = 15
             self.view.layoutIfNeeded()
 
         },completion:{ (finished: Bool) in
+            self.popUpView.title.font = labelCopy.font
+            self.popUpView.title.transform = .identity
+            self.popUpView.title.bounds = smallerBounds
             self.isAnimating = false
             self.popUpView.removeFromSuperview()
         })
@@ -191,14 +204,24 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
         popUpView.title.text = cellView.title.text
         popUpView.descriptionText.text = cellView.descriptionText.text
         popUpView.duration.text = cellView.duration.text
-        
+        print("popUpView.title.frame")
+        print(popUpView.title.frame)
         self.view.addSubview(popUpView)
+        
+        var biggerBounds = popUpView.title.bounds
+        popUpView.title.font = popUpView.title.font.withSize(100)
+        biggerBounds.size = popUpView.title.intrinsicContentSize
+        
+        popUpView.title.transform = scaleTransform(from: biggerBounds.size, to: popUpView.title.bounds.size)
+        popUpView.title.bounds = biggerBounds
+        print("123333")
+        print(popUpView.title.frame)
         UIView.animate(withDuration: 0.3, animations: {
             self.popUpView.frame = self.collectionView.frame
-            self.popUpView.title.bounds = CGRect(x: 0, y: 0, width: cellView.title.frame.width * 3, height: cellView.title.frame.height * 3)
-            self.popUpView.title.font = self.popUpView.title.font.withSize(100)
+            self.popUpView.title.transform = .identity
+
             self.titleTop.constant = 0
-            
+
             self.popUpView.layer.cornerRadius = 0
             self.view.layoutIfNeeded()
             
@@ -209,26 +232,32 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
     }
     
     func initializePopUpView(){
-        
+
         popUpView = PrepMapView(frame: CGRect(x: 0, y: 0, width: 75, height: 100))
-        let title = UILabel(frame: CGRect(x: 10, y: 0, width: 54, height: 27))
+        popUpView.title = UILabel(frame: CGRect(x: 10, y: 0, width: 1 * 54, height: 1 * 27))
+        popUpView.title.backgroundColor = UIColor.purple
+        popUpView.title.font = popUpView.title.font.withSize(CGFloat(22 * 1))
+
         let descriptionText = UILabel(frame: CGRect(x: 0, y: 34, width:75, height: 44))
         let duration = UILabel(frame: CGRect(x: 30, y: 86, width: 43, height: 12))
     
         descriptionText.numberOfLines = 8
-        
-        popUpView.addSubview(title)
+        print("dddd")
+        print(popUpView.title.frame)
+        popUpView.addSubview(popUpView.title)
         popUpView.addSubview(descriptionText)
         popUpView.addSubview(duration)
        
-        title.translatesAutoresizingMaskIntoConstraints = false
+        print("sadfjlk")
+        print(popUpView.title.frame)
+        popUpView.title.translatesAutoresizingMaskIntoConstraints = false
 //        descriptionText.translatesAutoresizingMaskIntoConstraints = false
         duration.translatesAutoresizingMaskIntoConstraints = false
 
-        let titleCenterX = NSLayoutConstraint(item: title, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: popUpView, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0)
+        let titleCenterX = NSLayoutConstraint(item: popUpView.title, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: popUpView, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0)
         titleCenterX.isActive = true
         
-        titleTop = NSLayoutConstraint(item: title, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.greaterThanOrEqual, toItem: popUpView, attribute: NSLayoutAttribute.top, multiplier: 1, constant: 0)
+        titleTop = NSLayoutConstraint(item: popUpView.title, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.greaterThanOrEqual, toItem: popUpView, attribute: NSLayoutAttribute.top, multiplier: 1, constant: 0)
         
         titleTop.isActive = true
 //
@@ -237,12 +266,11 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
         let durationRight = NSLayoutConstraint(item: duration, attribute: NSLayoutAttribute.right, relatedBy: NSLayoutRelation.equal, toItem: popUpView, attribute: NSLayoutAttribute.right, multiplier: 1, constant: -2)
         durationRight.isActive = true
 
-        popUpView.title = title
         popUpView.descriptionText = descriptionText
         popUpView.duration = duration
         self.popUpView.frame = self.collectionView.frame
 
-        self.popUpView.title.font = self.popUpView.title.font.withSize(22.0)
+//        self.popUpView.title.font = self.popUpView.title.font.withSize(22.0)
         self.popUpView.descriptionText.font = self.popUpView.descriptionText.font.withSize(14.0)
         self.popUpView.duration.font = self.popUpView.duration.font.withSize(10.0)
 
@@ -250,6 +278,12 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
         popUpView.addGestureRecognizer(tapGestureRecognizer)
     }
 
+    private func scaleTransform(from: CGSize, to: CGSize) -> CGAffineTransform {
+        let scaleX = to.width / from.width
+        let scaleY = to.height / from.height
+        
+        return CGAffineTransform(scaleX: scaleX, y: scaleY)
+    }
     
 }
 
@@ -258,6 +292,16 @@ extension UICollectionView {
     func reloadData(completion: @escaping ()->()) {
         UIView.animate(withDuration: 0, animations: { self.reloadData() })
         { _ in completion() }
+    }
+}
+
+extension UILabel {
+    func copyLabel() -> UILabel {
+        let label = UILabel()
+        label.font = self.font
+        label.frame = self.frame
+        label.text = self.text
+        return label
     }
 }
 

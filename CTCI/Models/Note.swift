@@ -1,12 +1,5 @@
-//
-//  Note.swift
-//  CTCI
-//
-//  Created by Michael Odere on 10/21/17.
-//  Copyright © 2017 Michael Odere. All rights reserved.
-//
 import Foundation
-class Note: NSObject {
+class Note {
     var title: String
     var bullets: [String]
     

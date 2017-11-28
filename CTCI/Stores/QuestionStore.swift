@@ -1,11 +1,3 @@
-//
-//  QuestionStore.swift
-//  CTCI
-//
-//  Created by Michael Odere on 10/22/17.
-//  Copyright © 2017 Michael Odere. All rights reserved.
-//
-
 import Foundation
 
 class QuestionStore{

@@ -1,11 +1,3 @@
-//
-//  StudyViewController.swift
-//  CTCI
-//
-//  Created by Michael Odere on 10/20/17.
-//  Copyright © 2017 Michael Odere. All rights reserved.
-//
-
 import UIKit
 
 class StudyViewController: UITableViewController {
@@ -23,13 +15,13 @@ class StudyViewController: UITableViewController {
         return 70.0
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return studyStore.allStudyTopics.count
+        return studyStore.allNoteTopic.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell =  tableView.dequeueReusableCell(withIdentifier: "TopicCell", for: indexPath) as! TopicCell
-        let topic = studyStore.allStudyTopics[indexPath.row]
+        let topic = studyStore.allNoteTopic[indexPath.row]
         
         let image = UIImage(named: topic.imageName)
         
@@ -45,7 +37,7 @@ class StudyViewController: UITableViewController {
         if segue.identifier == "ShowNotes"{
             if let row = tableView.indexPathForSelectedRow?.row{
                 
-                let topic = studyStore.allStudyTopics[row]
+                let topic = studyStore.allNoteTopic[row]
                 
                 let subjectViewController = segue.destination as! NotesViewController
                 subjectViewController.notes = topic.notes

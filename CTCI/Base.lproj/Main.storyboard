@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="TopicCell" rowHeight="70" id="bEC-TY-XjH" customClass="TopicCell" customModule="CTCI" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="TopicCell" rowHeight="70" id="bEC-TY-XjH" customClass="TopicCell" customModule="CTCI" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="70"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bEC-TY-XjH" id="dS3-Xo-Yqr">
@@ -343,7 +343,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="150 days" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5EH-Iu-VpP">
-                                                            <rect key="frame" x="30" y="86" width="43" height="12"/>
+                                                            <rect key="frame" x="26" y="86" width="43" height="12"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -361,7 +361,7 @@
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstItem="hHj-eF-doB" firstAttribute="centerX" secondItem="0Za-uu-CWe" secondAttribute="centerX" id="0o7-5d-fdI"/>
-                                                        <constraint firstAttribute="trailing" secondItem="5EH-Iu-VpP" secondAttribute="trailing" constant="2" id="LHW-tS-j5Z"/>
+                                                        <constraint firstAttribute="trailing" secondItem="5EH-Iu-VpP" secondAttribute="trailing" constant="6" id="LHW-tS-j5Z"/>
                                                         <constraint firstItem="5EH-Iu-VpP" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="0Za-uu-CWe" secondAttribute="leading" constant="20" symbolic="YES" id="TGU-mV-xBH"/>
                                                         <constraint firstItem="hHj-eF-doB" firstAttribute="top" secondItem="0Za-uu-CWe" secondAttribute="top" id="egy-hZ-cUE"/>
                                                         <constraint firstAttribute="bottom" secondItem="5EH-Iu-VpP" secondAttribute="bottom" constant="2" id="gPt-BM-qNK"/>

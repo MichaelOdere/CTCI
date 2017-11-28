@@ -1,12 +1,4 @@
-//
-//  StudyTopic.swift
-//  CTCI
-//
-//  Created by Michael Odere on 10/21/17.
-//  Copyright © 2017 Michael Odere. All rights reserved.
-//
-
-class StudyTopic: Topic {
+class NoteTopic: Topic {
     
     var notes : [Note]
     

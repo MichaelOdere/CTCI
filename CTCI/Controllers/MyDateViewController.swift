@@ -1,11 +1,3 @@
-//
-//  MyDateViewController.swift
-//  CTCI
-//
-//  Created by Michael Odere on 10/27/17.
-//  Copyright © 2017 Michael Odere. All rights reserved.
-//
-
 import UIKit
 
 class MyDateViewController: UIViewController{

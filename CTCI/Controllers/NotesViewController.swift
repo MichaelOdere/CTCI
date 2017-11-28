@@ -1,11 +1,3 @@
-//
-//  NotesViewController.swift
-//  CTCI
-//
-//  Created by Michael Odere on 10/22/17.
-//  Copyright © 2017 Michael Odere. All rights reserved.
-//
-
 import UIKit
 
 class NotesViewController : UITableViewController{
@@ -35,7 +27,6 @@ class NotesViewController : UITableViewController{
         let note = notes[indexPath.row]
         cell.title.text = note.title
         cell.bullets.text = note.getBullets()
-        print(note.getBullets())
         
         if hasColor{
             cell.backgroundColor = color

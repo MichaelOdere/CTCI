@@ -1,11 +1,3 @@
-//
-//  MilestoneStore.swift
-//  CTCI
-//
-//  Created by Michael Odere on 11/27/17.
-//  Copyright © 2017 Michael Odere. All rights reserved.
-//
-
 import Foundation
 import UIKit
 
@@ -74,6 +66,24 @@ class MilestoneStore {
         
         return color
     }
-    
 
 }
+/*
+
+func cellColor(milestone: Milestone, currentDaysFromSelectedDate: Int)->UIColor{
+    // if this is the first miletone then days = running days because nothing else has been added
+    var color = UIColor(red:204/255, green:203/255, blue:198/255, alpha:1.0)
+    
+    if milestone.totalDays <= currentDaysFromSelectedDate{
+        if milestone.totalDays + milestone.days >= currentDaysFromSelectedDate{
+            color = UIColor(red:239/255, green:217/255, blue:193/255, alpha:1.0)
+            
+        }else{
+            color = UIColor(red:199/255, green:216/255, blue:198/255, alpha:1.0)
+        }
+    }
+    
+    return color
+}
+
+*/

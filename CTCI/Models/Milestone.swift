@@ -1,11 +1,3 @@
-//
-//  Milestone.swift
-//  CTCI
-//
-//  Created by Michael Odere on 11/27/17.
-//  Copyright © 2017 Michael Odere. All rights reserved.
-//
-
 import Foundation
 
 class Milestone {
