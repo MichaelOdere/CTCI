@@ -60,9 +60,6 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
                         self.reloadAnimation()
                     }
                     
-//                    self.updateCollectionViewColors {
-//                        print("Done!")
-//                    }
                 }
             }
             currentSelectedDate =  temp as! Date
@@ -130,7 +127,7 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
     }
     
     func reloadAnimation(){
-        print("animating....")
+
         var delay:Double = 0.0
         var paths = collectionView.indexPathsForVisibleItems
         paths = paths.sorted(by: {$0.row < $1.row})
@@ -157,7 +154,6 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
     @objc func removePopUp(sender: UITapGestureRecognizer? = nil) {
         self.isAnimating = true
 
-//        self.popUpView.title.font =  self.popUpView.title.font.withSize(20)
         let labelCopy = self.popUpView.title.copyLabel()
         var smallerBounds = labelCopy.bounds
         labelCopy.font = self.popUpView.title.font.withSize(22)
@@ -167,16 +163,10 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
         
         
         UIView.animate(withDuration: 0.3, animations: {
-            print("12222222")
-            print(self.popUpView.title.frame)
             self.popUpView.frame = self.lastFrame
-//            self.popUpView.title.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
             self.popUpView.title.transform = shrinkTransform
 
-//            self.popUpView.title.font = self.popUpView.title.font.withSize(22)
-//            self.popUpView.title.transform =  .identity //CGAffineTransform(scaleX: CGFloat(1/self.scaler), y: CGFloat(1/self.scaler))
-
-            self.titleTop.constant = -50
+            self.titleTop.constant = -self.popUpView.title.frame.origin.y
 
             self.popUpView.layer.cornerRadius = 15
             self.view.layoutIfNeeded()
@@ -234,24 +224,20 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
     func initializePopUpView(){
 
         popUpView = PrepMapView(frame: CGRect(x: 0, y: 0, width: 75, height: 100))
-        popUpView.title = UILabel(frame: CGRect(x: 10, y: 0, width: 1 * 54, height: 1 * 27))
-        popUpView.title.backgroundColor = UIColor.purple
-        popUpView.title.font = popUpView.title.font.withSize(CGFloat(22 * 1))
+        popUpView.title = UILabel(frame: CGRect(x: 10, y: 0, width: 54, height: 27))
+
+//        popUpView.title.font = popUpView.title.font.withSize(100)
+//        popUpView.title.bounds.size = popUpView.title.intrinsicContentSize
 
         let descriptionText = UILabel(frame: CGRect(x: 0, y: 34, width:75, height: 44))
         let duration = UILabel(frame: CGRect(x: 30, y: 86, width: 43, height: 12))
     
         descriptionText.numberOfLines = 8
-        print("dddd")
-        print(popUpView.title.frame)
         popUpView.addSubview(popUpView.title)
         popUpView.addSubview(descriptionText)
         popUpView.addSubview(duration)
        
-        print("sadfjlk")
-        print(popUpView.title.frame)
         popUpView.title.translatesAutoresizingMaskIntoConstraints = false
-//        descriptionText.translatesAutoresizingMaskIntoConstraints = false
         duration.translatesAutoresizingMaskIntoConstraints = false
 
         let titleCenterX = NSLayoutConstraint(item: popUpView.title, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: popUpView, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0)
@@ -260,7 +246,7 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
         titleTop = NSLayoutConstraint(item: popUpView.title, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.greaterThanOrEqual, toItem: popUpView, attribute: NSLayoutAttribute.top, multiplier: 1, constant: 0)
         
         titleTop.isActive = true
-//
+
         let durationBottom = NSLayoutConstraint(item: duration, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.equal, toItem: popUpView, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: -2)
         durationBottom.isActive = true
         let durationRight = NSLayoutConstraint(item: duration, attribute: NSLayoutAttribute.right, relatedBy: NSLayoutRelation.equal, toItem: popUpView, attribute: NSLayoutAttribute.right, multiplier: 1, constant: -2)
@@ -270,7 +256,6 @@ class PrepMapViewController: UIViewController, UICollectionViewDataSource, UICol
         popUpView.duration = duration
         self.popUpView.frame = self.collectionView.frame
 
-//        self.popUpView.title.font = self.popUpView.title.font.withSize(22.0)
         self.popUpView.descriptionText.font = self.popUpView.descriptionText.font.withSize(14.0)
         self.popUpView.duration.font = self.popUpView.duration.font.withSize(10.0)
 
