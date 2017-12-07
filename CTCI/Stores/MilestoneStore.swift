@@ -8,7 +8,7 @@ class MilestoneStore {
     init(){
         var total:Int = 0
         let desc = "Here is a somewhat long description of a cell"
-        for elem in 0..<40{
+        for elem in 0..<10{
             milestones.append(Milestone(title: String(elem), desc: desc, days: 30, totalDays: total))
             total += 30
         }
