@@ -43,10 +43,14 @@ class VisulizerViewController:UIViewController{
         for last in 0..<nums.count{
             
             let index = nums.count - 1 - last
+            let num = nums[index]
             let frame = CGRect(x: width * CGFloat(index) + width * 0.5, y: 100, width: width, height: 100)
+
+//            let frame = CGRect(x: width * CGFloat(index) + width * 0.5, y: 100+CGFloat(90 - num * 10), width: width, height: CGFloat(num * 10))
+
             let object = VisualObject(frame: frame, value: index)
 
-            object.text = String(nums[index])
+            object.text = String(num)
             object.textAlignment = .center
             object.backgroundColor = colors[index % colors.count]
             objects.append(object)
@@ -96,7 +100,7 @@ class VisulizerViewController:UIViewController{
         visualObjects[index2] =  object1
         visualObjects[index1] =  object2
     }
-
+    
 }
 
 

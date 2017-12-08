@@ -14,6 +14,7 @@ class VisualObject:UILabel{
     
     init(frame: CGRect, value:Int) {
         self.value = value
+        
         super.init(frame: frame)
 
     }
@@ -47,6 +48,7 @@ class VisualObject:UILabel{
         
         self.layer.add(anim, forKey: "position")
         self.frame.origin = positions.destination
+
     }
     
     func getSwapPositions(origin:CGPoint, destination: CGPoint)->SwapPositions{
