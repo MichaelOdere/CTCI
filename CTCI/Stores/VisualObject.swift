@@ -45,7 +45,6 @@ class VisualObject:UILabel{
         let anim = CAKeyframeAnimation(keyPath: "position")
         anim.path = path.cgPath
         anim.duration = 1.0
-        
         self.layer.add(anim, forKey: "position")
         self.frame.origin = positions.destination
 
