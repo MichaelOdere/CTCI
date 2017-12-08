@@ -51,7 +51,7 @@ class VisualObject:UILabel{
     }
     
     func getSwapPositions(origin:CGPoint, destination: CGPoint)->SwapPositions{
-        let above = CGPoint(x: self.frame.origin.x - self.frame.width / 2, y: origin.y - self.frame.height)
+        let above = CGPoint(x: self.frame.origin.x + self.frame.width / 2, y: origin.y - self.frame.height)
         let aboveSlide = CGPoint(x: destination.x + self.frame.width / 2, y: origin.y - self.frame.height)
         let slide = CGPoint(x: destination.x + self.frame.width / 2, y: origin.y + self.frame.height / 2)
         let origin = CGPoint(x: above.x, y: slide.y)

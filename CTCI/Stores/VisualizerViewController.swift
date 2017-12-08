@@ -5,7 +5,8 @@ class VisulizerViewController:UIViewController{
     @IBOutlet weak var visualView: UIView!
     var visualObjects:[VisualObject]!
     var wall:VisualObject!
-    var operations:[(Int, Int)] = []
+    var quickSort:QuickSort = QuickSort(arr: nil)
+    
     var colors:[UIColor] = [UIColor.red, UIColor.blue, UIColor.purple, UIColor.yellow]
     override func viewDidLoad() {
         visualObjects = initializeVisualObjects()
@@ -14,6 +15,16 @@ class VisulizerViewController:UIViewController{
             visualView.addSubview(object)
         }
         
+       initializeButtons()
+    
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        animateObjects()
+        
+    }
+    
+    func initializeButtons(){
         let slideButton = UIButton(frame: CGRect(x: self.view.frame.width / 2 - 50, y: self.view.frame.height * 4/5, width: 100, height: 20))
         slideButton.addTarget(self, action:#selector(animateObjects), for: .touchUpInside)
         slideButton.titleLabel?.text = "Slide in!"
@@ -34,70 +45,50 @@ class VisulizerViewController:UIViewController{
         sortButton.titleLabel?.textColor = UIColor.black
         sortButton.backgroundColor = UIColor.purple
         self.view.addSubview(sortButton)
-        
-        let width = visualView.frame.width/10
-        let frame = CGRect(x: 0, y: 0, width: width/2, height: 100)
-        wall = VisualObject(frame: frame, value: -1)
-//        wall.text = "Wall"
-//        wall.textAlignment = .center
-        wall.backgroundColor = UIColor.gray
-//        wall.transform = CGAffineTransform(rotationAngle: CGFloat.pi / 2)
-        self.view.addSubview(wall)
-    
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        animateObjects()
-        
     }
     
     func initializeVisualObjects()->[VisualObject]{
         
         let width = visualView.frame.width/10
+        let height:CGFloat = 100
+        let startX = width / 2
+        let y:CGFloat = 100
         
         var objects:[VisualObject] = []
-        var nums = Array(0...9)
         
-        nums = shuffleArray(arr: nums)
-        
-        for last in 0..<nums.count{
+        for last in 0..<quickSort.arr.count{
             
-            let index = nums.count - 1 - last
-            let num = nums[index]
-            let frame = CGRect(x: width * CGFloat(index) + width * 0.5, y: 100, width: width, height: 100)
+            let index = quickSort.arr.count - 1 - last
+            let num = quickSort.arr[index]
+            let frame = CGRect(x: width * CGFloat(index) + startX, y: y, width: width, height: height)
 
 //            let frame = CGRect(x: width * CGFloat(index) + width * 0.5, y: 100+CGFloat(90 - num * 10), width: width, height: CGFloat(num * 10)+10)
 
             let object = VisualObject(frame: frame, value: index)
 
+
             object.text = String(num)
             object.textAlignment = .center
             object.backgroundColor = colors[index % colors.count]
-            objects.append(object)
+            objects.insert(object, at: 0)
             
         }
         
-        quickSort(arr: &nums, low: 0, high: nums.count-1)
+        let frame = CGRect(x: 0, y: 0, width: width/2, height: 100)
+
+        wall = VisualObject(frame: frame, value: -1)
+        wall.backgroundColor = UIColor.gray
+        self.view.addSubview(wall)
+        
+//        quickSort(arr: &nums, low: 0, high: nums.count-1)
         
         return objects
     }
     
-    func shuffleArray(arr: Array<Int>)->Array<Int>{
-        
-        var tempArr = arr
-        for index in 0..<tempArr.count{
-            let random =  Int(arc4random_uniform(UInt32(arr.count)))
-            let tempVal = tempArr[random]
-            tempArr[random] = tempArr[index]
-            tempArr[index] = tempVal
-        }
-        
-        return tempArr
-    }
     
     @objc func animateObjects(){
         for index in 0..<visualObjects.count{
-            let object = visualObjects[index]
+            let object = visualObjects[visualObjects.count - 1 - index]
             object.animateIntoPlace(width: self.view.frame.width, delay: 0.1 * CGFloat(index))
             visualView.addSubview(object)
         }
@@ -125,6 +116,19 @@ class VisulizerViewController:UIViewController{
        
     }
     
+    @objc func sortObjects(){
+        
+        if quickSort.operations.count == 0{
+            return
+        }
+        let iter:Iteration = quickSort.operations.first!
+        
+//        swapObjects(index1: visualObjects.count - first - 1, index2: visualObjects.count - second - 1)
+        swapObjects(index1: iter.swapIndex1, index2: iter.swapIndex2)
+
+        quickSort.operations.removeFirst()
+        
+    }
     
     func swapObjects(index1: Int, index2: Int){
         
@@ -154,57 +158,8 @@ class VisulizerViewController:UIViewController{
         }
     }
     
-    @objc func sortObjects(){
+ 
 
-        if operations.count == 0{
-            return
-        }
-        let (first, second) = operations.first!
-        
-        swapObjects(index1: visualObjects.count - first - 1, index2: visualObjects.count - second - 1)
-        self.operations.removeFirst()
-        
-    }
-    
-    func partition(arr: inout Array<Int>, low:Int, high:Int)->Int{
-        
-        let pivot = arr[high]
-        var i = (low - 1)
-        
-        for j in low..<high{
-            if arr[j] <= pivot{
-                print("The pivot is \(pivot)")
-                print("That wall is \(i)")
-                print("Swap \(i) and \(j)")
-                i += 1
-                swap(arr: &arr, first: i, second: j)
-            }
-        }
-        swap(arr: &arr, first: i+1, second: high)
-        return (i + 1)
-    }
-    
-    func quickSort(arr: inout Array<Int>, low:Int, high:Int){
-        
-        if low < high{
-            let partitionValue = partition(arr: &arr, low: low, high: high)
-            
-            quickSort(arr: &arr, low: low, high: partitionValue - 1)
-            quickSort(arr: &arr, low: partitionValue + 1, high: high)
-        }
-    }
-    
-    func swap(arr: inout Array<Int>, first:Int, second:Int){
-
-        if first != second{
-            operations.append((first, second))
-        }
-        
-        let temp = arr[first]
-        arr[first] = arr[second]
-        arr[second] = temp
-    
-    }
     
 }
 
