@@ -4,6 +4,7 @@ class VisulizerViewController:UIViewController{
     
     @IBOutlet weak var visualView: UIView!
     var visualObjects:[VisualObject]!
+    var wall:VisualObject!
     var operations:[(Int, Int)] = []
     var colors:[UIColor] = [UIColor.red, UIColor.blue, UIColor.purple, UIColor.yellow]
     override func viewDidLoad() {
@@ -16,22 +17,33 @@ class VisulizerViewController:UIViewController{
         let slideButton = UIButton(frame: CGRect(x: self.view.frame.width / 2 - 50, y: self.view.frame.height * 4/5, width: 100, height: 20))
         slideButton.addTarget(self, action:#selector(animateObjects), for: .touchUpInside)
         slideButton.titleLabel?.text = "Slide in!"
+        slideButton.titleLabel?.textColor = UIColor.black
         slideButton.backgroundColor = UIColor.red
         self.view.addSubview(slideButton)
         
         let swapButton = UIButton(frame: CGRect(x: self.view.frame.width / 2 - 50, y: self.view.frame.height * 4/5 + 20, width: 100, height: 20))
         swapButton.addTarget(self, action:#selector(swapObjectsButton), for: .touchUpInside)
         swapButton.titleLabel?.text = "Swap!"
+        swapButton.titleLabel?.textColor = UIColor.black
         swapButton.backgroundColor = UIColor.blue
         self.view.addSubview(swapButton)
         
         let sortButton = UIButton(frame: CGRect(x: self.view.frame.width / 2 - 50, y: self.view.frame.height * 4/5 + 40, width: 100, height: 20))
-        swapButton.addTarget(self, action:#selector(sortObjects), for: .touchUpInside)
-        swapButton.titleLabel?.text = "Swap!"
-        swapButton.backgroundColor = UIColor.purple
-        self.view.addSubview(swapButton)
+        sortButton.addTarget(self, action:#selector(sortObjects), for: .touchUpInside)
+        sortButton.titleLabel?.text = "Sort!"
+        sortButton.titleLabel?.textColor = UIColor.black
+        sortButton.backgroundColor = UIColor.purple
+        self.view.addSubview(sortButton)
         
-        
+        let width = visualView.frame.width/10
+        let frame = CGRect(x: 0, y: 0, width: width/2, height: 100)
+        wall = VisualObject(frame: frame, value: -1)
+//        wall.text = "Wall"
+//        wall.textAlignment = .center
+        wall.backgroundColor = UIColor.gray
+//        wall.transform = CGAffineTransform(rotationAngle: CGFloat.pi / 2)
+        self.view.addSubview(wall)
+    
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -92,7 +104,7 @@ class VisulizerViewController:UIViewController{
     }
     
     @objc func swapObjectsButton(){
-        return
+
         let index1 =  Int(arc4random_uniform(UInt32(visualObjects.count)))
         var index2 =  Int(arc4random_uniform(UInt32(visualObjects.count)))
 
@@ -110,7 +122,7 @@ class VisulizerViewController:UIViewController{
 
         visualObjects[index2] =  object1
         visualObjects[index1] =  object2
-        
+       
     }
     
     
@@ -127,6 +139,19 @@ class VisulizerViewController:UIViewController{
         visualObjects[index2] =  object1
         visualObjects[index1] =  object2
 
+        
+        var smallerIndex = index1
+        
+        if index1 < index2{
+            smallerIndex = index2
+        }
+        smallerIndex = visualObjects.count - smallerIndex - 1
+        let width = visualView.frame.width/20 + visualView.frame.width/10 * CGFloat(smallerIndex+1)
+        let frame = CGRect(x: width, y: 0, width: visualView.frame.width/20, height: 100)
+        
+        UIView.animate(withDuration: 1) {
+            self.wall.frame = frame
+        }
     }
     
     @objc func sortObjects(){
@@ -147,8 +172,10 @@ class VisulizerViewController:UIViewController{
         var i = (low - 1)
         
         for j in low..<high{
-            
             if arr[j] <= pivot{
+                print("The pivot is \(pivot)")
+                print("That wall is \(i)")
+                print("Swap \(i) and \(j)")
                 i += 1
                 swap(arr: &arr, first: i, second: j)
             }

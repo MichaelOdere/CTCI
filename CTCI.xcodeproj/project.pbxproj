@@ -26,6 +26,7 @@
 		F99FBE141F943112001F6C20 /* StudyStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99FBE131F943112001F6C20 /* StudyStore.swift */; };
 		F99FBE181F945C50001F6C20 /* TopicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99FBE171F945C50001F6C20 /* TopicCell.swift */; };
 		F9A24F801FB56CB900D095CE /* PrepMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A24F7F1FB56CB900D095CE /* PrepMapView.swift */; };
+		F9A42AF11FDB4BCA00936819 /* QuickSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A42AF01FDB4BCA00936819 /* QuickSort.swift */; };
 		F9BCE2E91FA315610089BB27 /* MyDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BCE2E81FA315610089BB27 /* MyDateViewController.swift */; };
 		F9CFC2E61FCCA8D700B12F2C /* Milestone.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CFC2E51FCCA8D700B12F2C /* Milestone.swift */; };
 		F9CFC2E81FCCB1A100B12F2C /* MilestoneStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CFC2E71FCCB1A100B12F2C /* MilestoneStore.swift */; };
@@ -58,6 +59,7 @@
 		F99FBE131F943112001F6C20 /* StudyStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyStore.swift; sourceTree = "<group>"; };
 		F99FBE171F945C50001F6C20 /* TopicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCell.swift; sourceTree = "<group>"; };
 		F9A24F7F1FB56CB900D095CE /* PrepMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PrepMapView.swift; path = CTCI/Controllers/PrepMapView.swift; sourceTree = SOURCE_ROOT; };
+		F9A42AF01FDB4BCA00936819 /* QuickSort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickSort.swift; sourceTree = "<group>"; };
 		F9BCE2E81FA315610089BB27 /* MyDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDateViewController.swift; sourceTree = "<group>"; };
 		F9CFC2E51FCCA8D700B12F2C /* Milestone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Milestone.swift; sourceTree = "<group>"; };
 		F9CFC2E71FCCB1A100B12F2C /* MilestoneStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneStore.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 				F9CFC2E71FCCB1A100B12F2C /* MilestoneStore.swift */,
 				F9D5E36C1FD9B3440073D118 /* VisualizerViewController.swift */,
 				F9D5E36A1FD9B2340073D118 /* VisualObject.swift */,
+				F9A42AF01FDB4BCA00936819 /* QuickSort.swift */,
 				F9D5E36E1FD9B4CB0073D118 /* VisualView.swift */,
 			);
 			path = Stores;
@@ -240,6 +243,7 @@
 				F9013F461FA7E5B60013E658 /* PrepMapContentCell.swift in Sources */,
 				F98CE0CC1FA84608006D579B /* PrepMapLayout.swift in Sources */,
 				F99FBE141F943112001F6C20 /* StudyStore.swift in Sources */,
+				F9A42AF11FDB4BCA00936819 /* QuickSort.swift in Sources */,
 				F9BCE2E91FA315610089BB27 /* MyDateViewController.swift in Sources */,
 				F99245131F9D5ABC00CB61D8 /* QuestionTopic.swift in Sources */,
 				F9CFC2E81FCCB1A100B12F2C /* MilestoneStore.swift in Sources */,
