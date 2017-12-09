@@ -8,7 +8,10 @@ class VisulizerViewController:UIViewController{
     var quickSort:QuickSort = QuickSort(arr: nil)
     
     var colors:[UIColor] = [UIColor.red, UIColor.blue, UIColor.purple, UIColor.yellow]
+   
     override func viewDidLoad() {
+
+        quickSort.reset()
         visualObjects = initializeVisualObjects()
         
         for object in visualObjects{
@@ -45,6 +48,13 @@ class VisulizerViewController:UIViewController{
         sortButton.titleLabel?.textColor = UIColor.black
         sortButton.backgroundColor = UIColor.purple
         self.view.addSubview(sortButton)
+        
+        let resetButton = UIButton(frame: CGRect(x: self.view.frame.width / 2 - 50, y: self.view.frame.height * 4/5 + 60, width: 100, height: 20))
+        resetButton.addTarget(self, action:#selector(reset), for: .touchUpInside)
+        resetButton.titleLabel?.text = "Reset!"
+        resetButton.titleLabel?.textColor = UIColor.black
+        resetButton.backgroundColor = UIColor.green
+        self.view.addSubview(resetButton)
     }
     
     func initializeVisualObjects()->[VisualObject]{
@@ -59,7 +69,7 @@ class VisulizerViewController:UIViewController{
         for last in 0..<quickSort.arr.count{
             
             let index = quickSort.arr.count - 1 - last
-            let num = quickSort.arr[index]
+            let num = quickSort.arrShuffled[index]
             let frame = CGRect(x: width * CGFloat(index) + startX, y: y, width: width, height: height)
 
 //            let frame = CGRect(x: width * CGFloat(index) + width * 0.5, y: 100+CGFloat(90 - num * 10), width: width, height: CGFloat(num * 10)+10)
@@ -79,9 +89,7 @@ class VisulizerViewController:UIViewController{
         wall = VisualObject(frame: frame, value: -1)
         wall.backgroundColor = UIColor.gray
         self.view.addSubview(wall)
-        
-//        quickSort(arr: &nums, low: 0, high: nums.count-1)
-        
+                
         return objects
     }
     
@@ -127,9 +135,29 @@ class VisulizerViewController:UIViewController{
         swapObjects(index1: iter.swapIndex1, index2: iter.swapIndex2)
 
         quickSort.operations.removeFirst()
-        
+
     }
     
+    @objc func reset(){
+        for object in visualObjects{
+            object.removeFromSuperview()
+        }
+        
+        wall.removeFromSuperview()
+        
+        quickSort.reset()
+        
+        visualObjects = []
+        visualObjects = initializeVisualObjects()
+        animateObjects()
+        
+        
+        for object in visualObjects{
+            visualView.addSubview(object)
+        }
+        
+    }
+
     func swapObjects(index1: Int, index2: Int){
         
         let object1 = visualObjects[index1]
@@ -144,12 +172,8 @@ class VisulizerViewController:UIViewController{
         visualObjects[index1] =  object2
 
         
-        var smallerIndex = index1
+        let smallerIndex = min(index1, index2)
         
-        if index1 < index2{
-            smallerIndex = index2
-        }
-        smallerIndex = visualObjects.count - smallerIndex - 1
         let width = visualView.frame.width/20 + visualView.frame.width/10 * CGFloat(smallerIndex+1)
         let frame = CGRect(x: width, y: 0, width: visualView.frame.width/20, height: 100)
         
@@ -157,9 +181,6 @@ class VisulizerViewController:UIViewController{
             self.wall.frame = frame
         }
     }
-    
- 
-
     
 }
 

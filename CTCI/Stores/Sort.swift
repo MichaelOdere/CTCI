@@ -11,6 +11,8 @@ struct Iteration{
 class Sort{
     
     var arr:Array<Int> = Array(0...9)
+    var arrShuffled:Array<Int>!
+    var arrSorted:Array<Int>!
     var operations:[Iteration] = []
     
     init(arr: Array<Int>?){
@@ -18,11 +20,9 @@ class Sort{
         if let arr = arr{
             self.arr = arr
         }
-        
-        self.arr = shuffleArray(arr: self.arr)
     }
     
-    func shuffleArray(arr: Array<Int>)->Array<Int>{
+    func shuffle(arr: Array<Int>)->Array<Int>{
         
         var tempArr = arr
         for index in 0..<tempArr.count{
@@ -34,11 +34,17 @@ class Sort{
         
         return tempArr
     }
-
     
 }
 
 class QuickSort:Sort {
+    
+    override init(arr: Array<Int>?) {
+        super.init(arr: arr)
+        
+    }
+    
+    // Sort Functionality
     func partition(arr: inout Array<Int>, low:Int, high:Int)->Int{
         
         let pivot = arr[high]
@@ -85,6 +91,7 @@ class QuickSort:Sort {
         arr[second] = temp
     }
     
+    // Create Iteration and Iteration Info
     func createIteration(index1:Int, index2:Int, pivot:Int)->Iteration?{
         if index1 != index2{
             let message = createActionMessage(index1: index1 , index2: index2)
@@ -97,5 +104,15 @@ class QuickSort:Sort {
     func createActionMessage(index1:Int, index2:Int)->String{
         return "Swap values at index: \(index1) and index: \(index2)"
     }
+    
+    // Functionality Operations
+    func reset(){
+        self.operations.removeAll()
+        self.arrShuffled = shuffle(arr: self.arr)
+        self.arrSorted = self.arrShuffled
+        var arr = self.arrSorted
+        sort(arr: &arr!, low: 0, high: self.arrSorted.count - 1)
+    }
+    
     
 }
