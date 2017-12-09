@@ -4,9 +4,10 @@ class VisulizerViewController:UIViewController{
     
     @IBOutlet weak var visualView: UIView!
     var visualObjects:[VisualObject]!
+    var visualIndex:Int = 0
     var wall:VisualObject!
+    var messageLabel:UILabel!
     var quickSort:QuickSort = QuickSort(arr: nil)
-    
     var colors:[UIColor] = [UIColor.red, UIColor.blue, UIColor.purple, UIColor.yellow]
    
     override func viewDidLoad() {
@@ -55,6 +56,12 @@ class VisulizerViewController:UIViewController{
         resetButton.titleLabel?.textColor = UIColor.black
         resetButton.backgroundColor = UIColor.green
         self.view.addSubview(resetButton)
+        
+        messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 100))
+        messageLabel.textColor = UIColor.black
+        messageLabel.textAlignment = .center
+        messageLabel.backgroundColor = UIColor.brown
+        self.view.addSubview(messageLabel)
     }
     
     func initializeVisualObjects()->[VisualObject]{
@@ -62,7 +69,7 @@ class VisulizerViewController:UIViewController{
         let width = visualView.frame.width/10
         let height:CGFloat = 100
         let startX = width / 2
-        let y:CGFloat = 100
+        let y:CGFloat = 400
         
         var objects:[VisualObject] = []
         
@@ -79,12 +86,12 @@ class VisulizerViewController:UIViewController{
 
             object.text = String(num)
             object.textAlignment = .center
-            object.backgroundColor = colors[index % colors.count]
+            object.backgroundColor = UIColor.orange //colors[index % colors.count]
             objects.insert(object, at: 0)
             
         }
         
-        let frame = CGRect(x: 0, y: 0, width: width/2, height: 100)
+        let frame = CGRect(x: 0, y: y - height, width: width/2, height: height)
 
         wall = VisualObject(frame: frame, value: -1)
         wall.backgroundColor = UIColor.gray
@@ -98,8 +105,9 @@ class VisulizerViewController:UIViewController{
         for index in 0..<visualObjects.count{
             let object = visualObjects[visualObjects.count - 1 - index]
             object.animateIntoPlace(width: self.view.frame.width, delay: 0.1 * CGFloat(index))
-            visualView.addSubview(object)
         }
+        
+        wall.animateIntoPlace(width:self.view.frame.width, delay: 0.1 * CGFloat(visualObjects.count))
     }
     
     @objc func swapObjectsButton(){
@@ -126,16 +134,29 @@ class VisulizerViewController:UIViewController{
     
     @objc func sortObjects(){
         
-        if quickSort.operations.count == 0{
+        if visualIndex == quickSort.operations.count{
             return
         }
-        let iter:Iteration = quickSort.operations.first!
+        
+        if visualIndex != 0{
+            for e in visualObjects{
+                e.backgroundColor = UIColor.orange
+            }
+        }
+        
+        let iter:Iteration = quickSort.operations[visualIndex]
         
 //        swapObjects(index1: visualObjects.count - first - 1, index2: visualObjects.count - second - 1)
-        swapObjects(index1: iter.swapIndex1, index2: iter.swapIndex2)
+        if iter.pivot != nil{
+            swapObjects(index1: iter.swapIndex1, index2: iter.swapIndex2)
+        }else{
+            visualObjects[iter.swapIndex1].backgroundColor = UIColor.blue
+            visualObjects[iter.swapIndex2].backgroundColor = UIColor.blue
+        }
+        
+        messageLabel.text = iter.message
 
-        quickSort.operations.removeFirst()
-
+        visualIndex += 1
     }
     
     @objc func reset(){
@@ -156,6 +177,7 @@ class VisulizerViewController:UIViewController{
             visualView.addSubview(object)
         }
         
+        visualIndex = 0
     }
 
     func swapObjects(index1: Int, index2: Int){
@@ -175,10 +197,10 @@ class VisulizerViewController:UIViewController{
         let smallerIndex = min(index1, index2)
         
         let width = visualView.frame.width/20 + visualView.frame.width/10 * CGFloat(smallerIndex+1)
-        let frame = CGRect(x: width, y: 0, width: visualView.frame.width/20, height: 100)
-        
+        let orign = CGPoint(x: width, y: wall.frame.origin.y)
+
         UIView.animate(withDuration: 1) {
-            self.wall.frame = frame
+            self.wall.frame.origin = orign
         }
     }
     

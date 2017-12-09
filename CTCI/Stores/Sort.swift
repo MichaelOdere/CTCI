@@ -1,11 +1,11 @@
 import UIKit
 
 struct Iteration{
-    var pivot:Int
-    var wall:Int
+    var pivot:Int?
+    var wall:Int?
     var swapIndex1:Int
     var swapIndex2:Int
-    var message:String
+    var message:String?
 }
 
 class Sort{
@@ -31,8 +31,8 @@ class Sort{
             tempArr[random] = tempArr[index]
             tempArr[index] = tempVal
         }
-        
         return tempArr
+
     }
     
 }
@@ -51,23 +51,32 @@ class QuickSort:Sort {
         var i = (low - 1)
         
         for j in low..<high{
+           
+            print("The pivot is \(pivot)")
+            print("That wall is \(arr[i+1])")
+            print("Comparing \(arr[i+1]) and \(pivot)")
+            
+            let iterCompare = createIterationCompare(index1: j, index2: high, wall: i+1)
+            if let iterCompare = iterCompare{
+                operations.append(iterCompare)
+            }
             if arr[j] <= pivot{
-                print("The pivot is \(pivot)")
-                print("That wall is \(i)")
-                print("Swap \(i) and \(j)")
+
                 i += 1
+                print("Swap \(arr[i]) and \(arr[j])")
+
                 swap(arr: &arr, first: i, second: j)
                 
-                let iter = createIteration(index1: i, index2: j, pivot: pivot)
-                if let iter = iter{
-                    operations.append(iter)
+                let iterSwap = createIterationSwap(index1: i, index2: j, pivot: pivot)
+                if let iterSwap = iterSwap{
+                    operations.append(iterSwap)
                 }
                 
             }
         }
         swap(arr: &arr, first: i+1, second: high)
         
-        let iter = createIteration(index1: i+1, index2: high, pivot: pivot)
+        let iter = createIterationSwap(index1: i+1, index2: high, pivot: pivot)
         if let iter = iter{
             operations.append(iter)
         }
@@ -92,19 +101,24 @@ class QuickSort:Sort {
     }
     
     // Create Iteration and Iteration Info
-    func createIteration(index1:Int, index2:Int, pivot:Int)->Iteration?{
+    func createIterationSwap(index1:Int, index2:Int, pivot:Int)->Iteration?{
         if index1 != index2{
-            let message = createActionMessage(index1: index1 , index2: index2)
+            let message = "Swap values at index \(index1) and \(index2)"
             let iter = Iteration(pivot: pivot, wall: min(index1 ,index2), swapIndex1: index1 , swapIndex2: index2, message: message)
             return iter
         }
         return nil
     }
     
-    func createActionMessage(index1:Int, index2:Int)->String{
-        return "Swap values at index: \(index1) and index: \(index2)"
+    func createIterationCompare(index1:Int, index2:Int, wall:Int)->Iteration?{
+        if index1 != index2{
+            let message = "Compare values at index \(index1) and \(index2)"
+            let iter = Iteration(pivot: nil, wall: nil, swapIndex1: index1 , swapIndex2: index2, message: message)
+            return iter
+        }
+        return nil
     }
-    
+
     // Functionality Operations
     func reset(){
         self.operations.removeAll()
