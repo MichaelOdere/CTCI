@@ -139,14 +139,15 @@ class VisulizerViewController:UIViewController{
         }
         
         if visualIndex != 0{
-            for e in visualObjects{
-                e.backgroundColor = UIColor.orange
-            }
+            let prevIter = quickSort.operations[visualIndex - 1]
+            if prevIter.pivot == nil{
+                visualObjects[prevIter.swapIndex1].backgroundColor = UIColor.orange
+                visualObjects[prevIter.swapIndex2].backgroundColor = UIColor.orange
+            }            
         }
         
         let iter:Iteration = quickSort.operations[visualIndex]
         
-//        swapObjects(index1: visualObjects.count - first - 1, index2: visualObjects.count - second - 1)
         if iter.pivot != nil{
             swapObjects(index1: iter.swapIndex1, index2: iter.swapIndex2)
         }else{
@@ -178,6 +179,8 @@ class VisulizerViewController:UIViewController{
         }
         
         visualIndex = 0
+        
+        messageLabel.text = ""
     }
 
     func swapObjects(index1: Int, index2: Int){
