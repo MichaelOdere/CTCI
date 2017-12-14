@@ -10,10 +10,10 @@ class StudyViewController: UITableViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 90
     }
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
-    {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
         return 70.0
     }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return studyStore.allNoteTopic.count
     }
@@ -27,9 +27,7 @@ class StudyViewController: UITableViewController {
         
         cell.titleLabel.text = topic.name
         cell.imageView?.image = image
-        
-        
-        
+                
         return cell
     }
     

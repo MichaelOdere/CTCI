@@ -27,7 +27,7 @@ class VisualObject:UILabel{
         
         self.transform = CGAffineTransform(translationX: -width, y: 0)
         
-        UIView.animate(withDuration: 0.8, delay: TimeInterval(delay), options: .curveEaseInOut, animations: {
+        UIView.animate(withDuration: 0.2, delay: TimeInterval(delay), options: .curveEaseInOut, animations: {
             self.transform = .identity
         })
     }

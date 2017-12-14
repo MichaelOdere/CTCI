@@ -20,7 +20,7 @@ class VisulizerViewController:UIViewController{
         }
         
        initializeButtons()
-    
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -62,6 +62,10 @@ class VisulizerViewController:UIViewController{
         messageLabel.textAlignment = .center
         messageLabel.backgroundColor = UIColor.brown
         self.view.addSubview(messageLabel)
+
+        let messageTop = NSLayoutConstraint(item: messageLabel, attribute: .top, relatedBy: .equal, toItem: self.view, attribute: .top, multiplier: 1, constant: 0)
+        messageTop.isActive = true
+        
     }
     
     func initializeVisualObjects()->[VisualObject]{
@@ -83,10 +87,10 @@ class VisulizerViewController:UIViewController{
 
             let object = VisualObject(frame: frame, value: index)
 
-
             object.text = String(num)
             object.textAlignment = .center
             object.backgroundColor = UIColor.orange //colors[index % colors.count]
+            object.alpha = 0
             objects.insert(object, at: 0)
             
         }
@@ -95,6 +99,7 @@ class VisulizerViewController:UIViewController{
 
         wall = VisualObject(frame: frame, value: -1)
         wall.backgroundColor = UIColor.gray
+        wall.alpha = 0
         self.view.addSubview(wall)
                 
         return objects
@@ -104,10 +109,11 @@ class VisulizerViewController:UIViewController{
     @objc func animateObjects(){
         for index in 0..<visualObjects.count{
             let object = visualObjects[visualObjects.count - 1 - index]
-            object.animateIntoPlace(width: self.view.frame.width, delay: 0.1 * CGFloat(index))
+            object.alpha = 1
+            object.animateIntoPlace(width: self.view.frame.width, delay: 0.05 * CGFloat(index))
         }
-        
-        wall.animateIntoPlace(width:self.view.frame.width, delay: 0.1 * CGFloat(visualObjects.count))
+        wall.alpha = 1
+        wall.animateIntoPlace(width:self.view.frame.width, delay: 0.05 * CGFloat(visualObjects.count))
     }
     
     @objc func swapObjectsButton(){
@@ -143,7 +149,7 @@ class VisulizerViewController:UIViewController{
             if prevIter.pivot == nil{
                 visualObjects[prevIter.swapIndex1].backgroundColor = UIColor.orange
                 visualObjects[prevIter.swapIndex2].backgroundColor = UIColor.orange
-            }            
+            }
         }
         
         let iter:Iteration = quickSort.operations[visualIndex]

@@ -9,19 +9,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-//
-//        // get the root tab controller
-//        let tabController = window!.rootViewController as! UITabBarController
-//       
-//        // get StudyViewControllers Navigation Controller so we can set studyStore
-//        var nav = tabController.viewControllers![0] as! UINavigationController
-//        let svc = nav.topViewController as! StudyViewController
-//        svc.studyStore = studyStore
-//        
-//        // get QuestionViewController's Navigation Controller so we can set questionStore
-//        nav = tabController.viewControllers![1] as! UINavigationController
-//        let qvc = nav.topViewController as! QuestionViewController
-//        qvc.questionStore = questionStore
+
+        // get the root tab controller
+        let tabController = window!.rootViewController as! UITabBarController
+       
+        // get StudyViewControllers Navigation Controller so we can set studyStore
+        var nav = tabController.viewControllers![0] as! UINavigationController
+        let svc = nav.topViewController as! StudyViewController
+        svc.studyStore = studyStore
+        
+        // get QuestionViewController's Navigation Controller so we can set questionStore
+        nav = tabController.viewControllers![1] as! UINavigationController
+        let qvc = nav.topViewController as! QuestionViewController
+        qvc.questionStore = questionStore
 
 
         return true

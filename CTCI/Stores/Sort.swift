@@ -51,10 +51,6 @@ class QuickSort:Sort {
         var i = (low - 1)
         
         for j in low..<high{
-           
-            print("The pivot is \(pivot)")
-            print("That wall is \(arr[i+1])")
-            print("Comparing \(arr[i+1]) and \(pivot)")
             
             let iterCompare = createIterationCompare(index1: j, index2: high, wall: i+1)
             if let iterCompare = iterCompare{
@@ -63,7 +59,6 @@ class QuickSort:Sort {
             if arr[j] <= pivot{
 
                 i += 1
-                print("Swap \(arr[i]) and \(arr[j])")
 
                 swap(arr: &arr, first: i, second: j)
                 
