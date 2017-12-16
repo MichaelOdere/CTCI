@@ -5,7 +5,7 @@ class TopicLayout: UICollectionViewLayout {
     fileprivate var cache = [UICollectionViewLayoutAttributes]()
 
     fileprivate var numberOfColumns = 2
-    fileprivate var cellPadding: CGFloat = 20
+    fileprivate var cellPadding: CGFloat = 25
     
     fileprivate var contentHeight: CGFloat = 0
     fileprivate var contentWidth: CGFloat {
