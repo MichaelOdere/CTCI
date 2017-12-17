@@ -2,10 +2,13 @@ import UIKit
 
 class LevelViewController:UIViewController{
     
+
     @IBOutlet weak var collectionView: UICollectionView!
     let cellScaling: CGFloat = 0.6
+    @IBInspectable public var inset: CGFloat = 0
 
     override func viewDidLoad() {
+        
         
         super.viewDidLoad()
         
@@ -15,12 +18,9 @@ class LevelViewController:UIViewController{
         
         let insetX = (view.bounds.width - cellWidth) / 2.0
         let insetY = (view.bounds.height - cellHeight) / 2.0
-        
+        inset = insetX
         let layout = collectionView!.collectionViewLayout as! UICollectionViewFlowLayout
         layout.itemSize = CGSize(width: cellWidth, height: cellWidth)
-//        layout.itemSize.width = cellWidth
-//        print("cell width \(cellWidth)")
-//        print("cell height \(cellHeight)")
         collectionView?.contentInset = UIEdgeInsets(top: insetY, left: insetX, bottom: insetY, right: insetX)
 
         collectionView.delegate = self
@@ -29,13 +29,11 @@ class LevelViewController:UIViewController{
     }
     
     override func viewWillAppear(_ animated: Bool) {
-
         collectionView.frame.origin.y += self.view.frame.height
-        UIView.animate(withDuration: 0.5, animations: {
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
             self.collectionView.frame.origin.y -= self.view.frame.height
         }, completion: nil)
     }
-    
 
 }
 
@@ -67,5 +65,15 @@ extension LevelViewController : UIScrollViewDelegate, UICollectionViewDelegate{
         targetContentOffset.pointee = offset
     }
     
-    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        var scaleValue:CGFloat = 0.9
+        for cell in collectionView.visibleCells{
+            if let levelCell = cell as? LevelCell {
+                levelCell.scale(withCarouselInset: inset)
+            }
+            //            scaleValue = cell.frame.origin.x / self.view.frame.width
+//            cell.transform = CGAffineTransform.identity.scaledBy(x: scaleValue, y: scaleValue)
+        }
+    }
 }
