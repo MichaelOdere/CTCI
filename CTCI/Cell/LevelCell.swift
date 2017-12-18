@@ -13,6 +13,7 @@ class LevelCell: UICollectionViewCell{
     @IBOutlet weak var lessonNumberLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
 
+    var indexPath:IndexPath!
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.layer.cornerRadius = 20
