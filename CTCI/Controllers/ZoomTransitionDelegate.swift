@@ -10,7 +10,7 @@ enum TransitionState{
 }
 
 class ZoomTransitioningDelegate:NSObject{
-    var transitionDuration = 5.0
+    var transitionDuration = 0.5
     var operation: UINavigationControllerOperation = .none
     private let zoomScale = CGFloat(15)
     private let backgroundScale = CGFloat(0.7)
