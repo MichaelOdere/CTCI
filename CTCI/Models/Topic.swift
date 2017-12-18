@@ -1,16 +1,17 @@
-//import Foundation
-//
-//class Topic {
-//    
-//    var name: String
-//    var currentLevel: Int
-//    var lessons: [Lesson]
-//    
-//    init(name: String, level: Int, lessons: [Lesson]) {
-//        self.name = name
-//        self.level = level
-//        self.lessons = lessons
-//
-//    }
-//}
+import Foundation
 
+class Topic {
+    var title:String
+    var currentLesson:Int
+    var totalLessons:Int
+    var lessons:[Lesson]
+    
+    init(title:String, currentLesson:Int, lessons:[Lesson]){
+        self.title = title
+        self.currentLesson = currentLesson
+        self.totalLessons = lessons.count
+        self.lessons = lessons
+    }
+    
+    
+}
