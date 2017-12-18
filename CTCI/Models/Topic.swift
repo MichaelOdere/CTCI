@@ -1,13 +1,16 @@
-import Foundation
+//import Foundation
+//
+//class Topic {
+//    
+//    var name: String
+//    var currentLevel: Int
+//    var lessons: [Lesson]
+//    
+//    init(name: String, level: Int, lessons: [Lesson]) {
+//        self.name = name
+//        self.level = level
+//        self.lessons = lessons
+//
+//    }
+//}
 
-class Topic {
-    
-    var name: String
-    var imageName: String
-    
-    init(name: String, imageName: String) {
-        self.name = name
-        self.imageName = imageName
-       
-    }
-}

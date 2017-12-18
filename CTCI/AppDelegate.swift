@@ -4,8 +4,8 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    let studyStore = StudyStore()
-    let questionStore = QuestionStore()
+//    let studyStore = StudyStore()
+//    let questionStore = QuestionStore()
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {

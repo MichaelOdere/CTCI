@@ -14,7 +14,6 @@ class LevelViewController:UIViewController{
         
         let screenSize = UIScreen.main.bounds.size
         let cellWidth = floor(screenSize.width * cellScaling)
-        let cellHeight = floor(screenSize.height * cellScaling)
 
         let insetX = (view.bounds.width - cellWidth) / 2.0
         let insetY:CGFloat = 0.0
@@ -22,9 +21,7 @@ class LevelViewController:UIViewController{
         let layout = collectionView!.collectionViewLayout as! UICollectionViewFlowLayout
         layout.itemSize = CGSize(width: cellWidth, height: cellWidth)
 
-        print(collectionView.contentInset)
         collectionView?.contentInset = UIEdgeInsets(top: insetY, left: insetX, bottom: insetY, right: insetX)
-        print(collectionView.contentInset)
 
         collectionView.delegate = self
         collectionView.dataSource = self
