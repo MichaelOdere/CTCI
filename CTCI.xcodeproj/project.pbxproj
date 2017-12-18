@@ -33,6 +33,8 @@
 		F9D5E36F1FD9B4CB0073D118 /* VisualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D5E36E1FD9B4CB0073D118 /* VisualView.swift */; };
 		F9DE606F1F9B9DD400C7D85D /* NoteTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DE606E1F9B9DD400C7D85D /* NoteTopic.swift */; };
 		F9DE60711F9B9E0400C7D85D /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DE60701F9B9E0400C7D85D /* Note.swift */; };
+		F9F334531FE6DD650073A67B /* ZoomTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F334521FE6DD650073A67B /* ZoomTransitionDelegate.swift */; };
+		F9F334551FE709310073A67B /* StudyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F334541FE709310073A67B /* StudyViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +66,8 @@
 		F9D5E36E1FD9B4CB0073D118 /* VisualView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualView.swift; sourceTree = "<group>"; };
 		F9DE606E1F9B9DD400C7D85D /* NoteTopic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTopic.swift; sourceTree = "<group>"; };
 		F9DE60701F9B9E0400C7D85D /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		F9F334521FE6DD650073A67B /* ZoomTransitionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomTransitionDelegate.swift; sourceTree = "<group>"; };
+		F9F334541FE709310073A67B /* StudyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,7 +126,9 @@
 			children = (
 				F99A191F1FE4904300539AE9 /* TopicsViewController.swift */,
 				F9B54BA71FE5D5FD00F3A318 /* LevelViewController.swift */,
+				F9F334521FE6DD650073A67B /* ZoomTransitionDelegate.swift */,
 				F9B54BA31FE4955E00F3A318 /* TopicLayout.swift */,
+				F9F334541FE709310073A67B /* StudyViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -249,7 +255,9 @@
 				F9B54BA61FE5B61900F3A318 /* LevelCell.swift in Sources */,
 				F9013F481FA7F13D0013E658 /* HorizontalArrowCell.swift in Sources */,
 				F9D5E36F1FD9B4CB0073D118 /* VisualView.swift in Sources */,
+				F9F334531FE6DD650073A67B /* ZoomTransitionDelegate.swift in Sources */,
 				F9DE606F1F9B9DD400C7D85D /* NoteTopic.swift in Sources */,
+				F9F334551FE709310073A67B /* StudyViewController.swift in Sources */,
 				F9CFC2E61FCCA8D700B12F2C /* Milestone.swift in Sources */,
 				F9D5E36D1FD9B3440073D118 /* VisualizerViewController.swift in Sources */,
 				F99A19201FE4904300539AE9 /* TopicsViewController.swift in Sources */,

@@ -6,9 +6,9 @@ class LevelViewController:UIViewController{
     @IBOutlet weak var collectionView: UICollectionView!
     let cellScaling: CGFloat = 0.6
     @IBInspectable public var inset: CGFloat = 0
+    var selectedIndexPath:IndexPath!
 
     override func viewDidLoad() {
-        
         
         super.viewDidLoad()
         
@@ -28,12 +28,12 @@ class LevelViewController:UIViewController{
 
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        collectionView.frame.origin.y += self.view.frame.height
-        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
-            self.collectionView.frame.origin.y -= self.view.frame.height
-        }, completion: nil)
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        collectionView.frame.origin.y += self.view.frame.height
+//        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
+//            self.collectionView.frame.origin.y -= self.view.frame.height
+//        }, completion: nil)
+//    }
 
 }
 
@@ -50,6 +50,11 @@ extension LevelViewController:UICollectionViewDataSource{
         cell.descriptionLabel.text = "Describe this!"
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.selectedIndexPath = indexPath
+    }
+    
 }
 
 extension LevelViewController : UIScrollViewDelegate, UICollectionViewDelegate{
@@ -67,13 +72,26 @@ extension LevelViewController : UIScrollViewDelegate, UICollectionViewDelegate{
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
-        var scaleValue:CGFloat = 0.9
         for cell in collectionView.visibleCells{
             if let levelCell = cell as? LevelCell {
                 levelCell.scale(withCarouselInset: inset)
             }
-            //            scaleValue = cell.frame.origin.x / self.view.frame.width
-//            cell.transform = CGAffineTransform.identity.scaledBy(x: scaleValue, y: scaleValue)
+
         }
     }
 }
+
+extension LevelViewController:ZoomViewController{
+    func zoomingCollectionViewCell(for transition: ZoomTransitioningDelegate) -> UIView? {
+        if let indexPath = selectedIndexPath{
+            let cell = collectionView?.cellForItem(at: indexPath) as! LevelCell
+            let frame = collectionView.convert(cell.frame, to: self.view)
+            let v = UIView(frame: frame)
+            v.backgroundColor = cell.backgroundColor
+
+            return v
+        }
+        return nil
+    }
+}
+

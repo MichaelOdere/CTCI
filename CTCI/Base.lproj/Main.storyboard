@@ -160,11 +160,17 @@
                                                     <rect key="frame" x="12" y="153" width="108.5" height="30"/>
                                                     <color key="backgroundColor" red="0.0" green="0.99143940210000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <state key="normal" title="Study"/>
+                                                    <connections>
+                                                        <segue destination="1Yu-01-Z8L" kind="show" id="qiY-BT-bhm"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="246" verticalCompressionResistancePriority="746" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tjp-GZ-Hmp">
                                                     <rect key="frame" x="128.5" y="153" width="108.5" height="30"/>
                                                     <color key="backgroundColor" red="0.0" green="0.99143940210000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <state key="normal" title="Quiz"/>
+                                                    <connections>
+                                                        <segue destination="1Yu-01-Z8L" kind="show" id="8wD-Z7-aa0"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </view>
@@ -215,6 +221,21 @@
             </objects>
             <point key="canvasLocation" x="-146.40000000000001" y="2300.5997001499254"/>
         </scene>
+        <!--Study View Controller-->
+        <scene sceneID="2hm-Gu-VB7">
+            <objects>
+                <viewController id="1Yu-01-Z8L" customClass="StudyViewController" customModule="CTCI" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="HUb-le-FLy">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="0UP-pn-C7S"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aZN-Bh-FML" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="618" y="2301"/>
+        </scene>
         <!--Topics-->
         <scene sceneID="4OV-wK-TyL">
             <objects>
@@ -227,12 +248,17 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
+                        <outlet property="delegate" destination="G2R-i9-Bng" id="ZPh-wq-Cec"/>
                         <segue destination="8rN-vv-xMO" kind="relationship" relationship="rootViewController" id="ZHM-nu-cSB"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uwg-MO-XzZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="G2R-i9-Bng" customClass="ZoomTransitioningDelegate" customModule="CTCI" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="-1744" y="2301.049475262369"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="qiY-BT-bhm"/>
+    </inferredMetricsTieBreakers>
 </document>
