@@ -96,7 +96,6 @@
                                         <connections>
                                             <outlet property="levelLabel" destination="x7J-KQ-P1F" id="Zt6-UB-UFh"/>
                                             <outlet property="titleLabel" destination="52d-Cg-yIE" id="T6A-8l-42c"/>
-                                            <segue destination="snV-9e-oYG" kind="show" id="gqZ-Ii-cvT"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -117,6 +116,7 @@
                     <navigationItem key="navigationItem" title="Topics" id="Fhg-Qj-5xc"/>
                     <connections>
                         <outlet property="collectionView" destination="VAl-zg-c2z" id="UZ5-kM-v9Y"/>
+                        <segue destination="snV-9e-oYG" kind="show" id="Kxj-7M-lTW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LMT-fW-AgG" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -126,7 +126,7 @@
         <!--Topic-->
         <scene sceneID="iBo-Y4-pYJ">
             <objects>
-                <viewController id="snV-9e-oYG" customClass="LevelViewController" customModule="CTCI" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LessonViewController" id="snV-9e-oYG" customClass="LessonViewController" customModule="CTCI" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BUC-4j-p9T">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -141,7 +141,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="LevelCell" id="qJD-AM-NR5" customClass="LevelCell" customModule="CTCI" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="LessonCell" id="qJD-AM-NR5" customClass="LessonCell" customModule="CTCI" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="14" width="249" height="203"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -166,21 +166,15 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="246" verticalCompressionResistancePriority="746" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9K5-7Q-rBb">
+                                                <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="246" verticalCompressionResistancePriority="746" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9K5-7Q-rBb" customClass="LessonButton" customModule="CTCI" customModuleProvider="target">
                                                     <rect key="frame" x="12" y="153" width="108.5" height="30"/>
                                                     <color key="backgroundColor" red="0.0" green="0.99143940210000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <state key="normal" title="Study"/>
-                                                    <connections>
-                                                        <segue destination="1Yu-01-Z8L" kind="show" id="qiY-BT-bhm"/>
-                                                    </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="246" verticalCompressionResistancePriority="746" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tjp-GZ-Hmp">
+                                                <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="246" verticalCompressionResistancePriority="746" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tjp-GZ-Hmp" customClass="LessonButton" customModule="CTCI" customModuleProvider="target">
                                                     <rect key="frame" x="128.5" y="153" width="108.5" height="30"/>
                                                     <color key="backgroundColor" red="0.0" green="0.99143940210000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <state key="normal" title="Quiz"/>
-                                                    <connections>
-                                                        <segue destination="1Yu-01-Z8L" kind="show" id="8wD-Z7-aa0"/>
-                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </view>
@@ -225,6 +219,8 @@
                     <navigationItem key="navigationItem" title="Topic" id="KFE-YB-yCc"/>
                     <connections>
                         <outlet property="collectionView" destination="6Tg-Nf-pEM" id="TK5-ll-7mL"/>
+                        <segue destination="1Yu-01-Z8L" kind="show" id="sht-8O-PLN"/>
+                        <segue destination="ddG-bF-FLH" kind="show" id="0j7-nl-4nr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X9F-e4-Pub" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -234,7 +230,7 @@
         <!--Study View Controller-->
         <scene sceneID="2hm-Gu-VB7">
             <objects>
-                <viewController id="1Yu-01-Z8L" customClass="StudyViewController" customModule="CTCI" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="StudyViewController" id="1Yu-01-Z8L" customClass="StudyViewController" customModule="CTCI" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HUb-le-FLy">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -259,7 +255,37 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aZN-Bh-FML" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="618" y="2301"/>
+            <point key="canvasLocation" x="681" y="1830"/>
+        </scene>
+        <!--Question View Controller-->
+        <scene sceneID="EAq-mV-CsQ">
+            <objects>
+                <viewController storyboardIdentifier="QuestionViewController" id="ddG-bF-FLH" customClass="QuestionViewController" customModule="CTCI" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qdt-7V-Dmm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sUT-7n-wAF">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="LEE-Nt-HJd" firstAttribute="bottom" secondItem="sUT-7n-wAF" secondAttribute="bottom" id="6gF-bb-4M1"/>
+                            <constraint firstItem="sUT-7n-wAF" firstAttribute="top" secondItem="LEE-Nt-HJd" secondAttribute="top" id="Lp5-Mt-k78"/>
+                            <constraint firstItem="sUT-7n-wAF" firstAttribute="leading" secondItem="LEE-Nt-HJd" secondAttribute="leading" id="Tyn-UE-8Kb"/>
+                            <constraint firstItem="sUT-7n-wAF" firstAttribute="trailing" secondItem="LEE-Nt-HJd" secondAttribute="trailing" id="h6Z-mG-KMM"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="LEE-Nt-HJd"/>
+                    </view>
+                    <connections>
+                        <outlet property="visibleView" destination="sUT-7n-wAF" id="rTZ-bP-Qp4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rb0-cC-T8f" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="680.79999999999995" y="2610.9445277361319"/>
         </scene>
         <!--Topics-->
         <scene sceneID="4OV-wK-TyL">
@@ -283,7 +309,4 @@
             <point key="canvasLocation" x="-1744" y="2301.049475262369"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="qiY-BT-bhm"/>
-    </inferredMetricsTieBreakers>
 </document>

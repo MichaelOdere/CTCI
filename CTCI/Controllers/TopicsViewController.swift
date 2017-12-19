@@ -8,14 +8,19 @@ class TopicsViewController:UIViewController{
     override func viewDidLoad() {
         collectionView.delegate = self
         collectionView.dataSource = self
-        
-        print(topicStore.allTopics[0].lessons)
     }
 }
 
 
 extension TopicsViewController:UICollectionViewDelegate, UICollectionViewDataSource{
 
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "LessonViewController") as! LessonViewController
+        vc.topic = topicStore.allTopics[indexPath.row]
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return topicStore.allTopics.count
     }

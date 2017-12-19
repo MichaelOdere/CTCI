@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		08A68CCD256C5902BE2949E6 /* Pods_CTCI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9E4729C3E15808923710356 /* Pods_CTCI.framework */; };
 		F924A9B71F9D6C6300B5496C /* QuestionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F924A9B61F9D6C6300B5496C /* QuestionStore.swift */; };
+		F95E9DF61FE99BF100D758F3 /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95E9DF51FE99BF100D758F3 /* QuestionViewController.swift */; };
+		F95E9DF81FE9A16200D758F3 /* LessonButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95E9DF71FE9A16200D758F3 /* LessonButton.swift */; };
 		F978593F1FE878BD001649D7 /* Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F978593E1FE878BD001649D7 /* Topic.swift */; };
 		F97859411FE878F6001649D7 /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97859401FE878F6001649D7 /* Lesson.swift */; };
 		F97859431FE87905001649D7 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97859421FE87905001649D7 /* Note.swift */; };
@@ -21,8 +23,8 @@
 		F99FBE141F943112001F6C20 /* TopicStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99FBE131F943112001F6C20 /* TopicStore.swift */; };
 		F99FBE181F945C50001F6C20 /* TopicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99FBE171F945C50001F6C20 /* TopicCell.swift */; };
 		F9B54BA41FE4955E00F3A318 /* TopicLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B54BA31FE4955E00F3A318 /* TopicLayout.swift */; };
-		F9B54BA61FE5B61900F3A318 /* LevelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B54BA51FE5B61900F3A318 /* LevelCell.swift */; };
-		F9B54BA81FE5D5FD00F3A318 /* LevelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B54BA71FE5D5FD00F3A318 /* LevelViewController.swift */; };
+		F9B54BA61FE5B61900F3A318 /* LessonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B54BA51FE5B61900F3A318 /* LessonCell.swift */; };
+		F9B54BA81FE5D5FD00F3A318 /* LessonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B54BA71FE5D5FD00F3A318 /* LessonViewController.swift */; };
 		F9EACEF61FE8889D0070246C /* CTCI_Data.json in Resources */ = {isa = PBXBuildFile; fileRef = F9EACEF51FE8889D0070246C /* CTCI_Data.json */; };
 		F9F334531FE6DD650073A67B /* ZoomTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F334521FE6DD650073A67B /* ZoomTransitionDelegate.swift */; };
 		F9F334551FE709310073A67B /* StudyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F334541FE709310073A67B /* StudyViewController.swift */; };
@@ -36,6 +38,8 @@
 		A156D74D81713B130A96A0B1 /* Pods-CTCI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CTCI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CTCI/Pods-CTCI.debug.xcconfig"; sourceTree = "<group>"; };
 		D44F58105ED9AAF466F00153 /* Pods-CTCI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CTCI.release.xcconfig"; path = "Pods/Target Support Files/Pods-CTCI/Pods-CTCI.release.xcconfig"; sourceTree = "<group>"; };
 		F924A9B61F9D6C6300B5496C /* QuestionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionStore.swift; sourceTree = "<group>"; };
+		F95E9DF51FE99BF100D758F3 /* QuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
+		F95E9DF71FE9A16200D758F3 /* LessonButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonButton.swift; sourceTree = "<group>"; };
 		F978593E1FE878BD001649D7 /* Topic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Topic.swift; sourceTree = "<group>"; };
 		F97859401FE878F6001649D7 /* Lesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lesson.swift; sourceTree = "<group>"; };
 		F97859421FE87905001649D7 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
@@ -50,8 +54,8 @@
 		F99FBE131F943112001F6C20 /* TopicStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicStore.swift; sourceTree = "<group>"; };
 		F99FBE171F945C50001F6C20 /* TopicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCell.swift; sourceTree = "<group>"; };
 		F9B54BA31FE4955E00F3A318 /* TopicLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicLayout.swift; sourceTree = "<group>"; };
-		F9B54BA51FE5B61900F3A318 /* LevelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelCell.swift; sourceTree = "<group>"; };
-		F9B54BA71FE5D5FD00F3A318 /* LevelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelViewController.swift; sourceTree = "<group>"; };
+		F9B54BA51FE5B61900F3A318 /* LessonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonCell.swift; sourceTree = "<group>"; };
+		F9B54BA71FE5D5FD00F3A318 /* LessonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonViewController.swift; sourceTree = "<group>"; };
 		F9E4729C3E15808923710356 /* Pods_CTCI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CTCI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9EACEF51FE8889D0070246C /* CTCI_Data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = CTCI_Data.json; path = CTCI/CTCI_Data.json; sourceTree = SOURCE_ROOT; };
 		F9F334521FE6DD650073A67B /* ZoomTransitionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomTransitionDelegate.swift; sourceTree = "<group>"; };
@@ -95,7 +99,8 @@
 			isa = PBXGroup;
 			children = (
 				F99FBE171F945C50001F6C20 /* TopicCell.swift */,
-				F9B54BA51FE5B61900F3A318 /* LevelCell.swift */,
+				F9B54BA51FE5B61900F3A318 /* LessonCell.swift */,
+				F95E9DF71FE9A16200D758F3 /* LessonButton.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -125,8 +130,9 @@
 			isa = PBXGroup;
 			children = (
 				F99A191F1FE4904300539AE9 /* TopicsViewController.swift */,
-				F9B54BA71FE5D5FD00F3A318 /* LevelViewController.swift */,
+				F9B54BA71FE5D5FD00F3A318 /* LessonViewController.swift */,
 				F9F334541FE709310073A67B /* StudyViewController.swift */,
+				F95E9DF51FE99BF100D758F3 /* QuestionViewController.swift */,
 				F9F334521FE6DD650073A67B /* ZoomTransitionDelegate.swift */,
 				F9B54BA31FE4955E00F3A318 /* TopicLayout.swift */,
 			);
@@ -309,6 +315,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F95E9DF61FE99BF100D758F3 /* QuestionViewController.swift in Sources */,
 				F924A9B71F9D6C6300B5496C /* QuestionStore.swift in Sources */,
 				F978593F1FE878BD001649D7 /* Topic.swift in Sources */,
 				F9F3741F1FE883DB00D23DFC /* VisualizerViewController.swift in Sources */,
@@ -316,15 +323,16 @@
 				F97859451FE8790A001649D7 /* Question.swift in Sources */,
 				F9B54BA41FE4955E00F3A318 /* TopicLayout.swift in Sources */,
 				F97859431FE87905001649D7 /* Note.swift in Sources */,
-				F9B54BA81FE5D5FD00F3A318 /* LevelViewController.swift in Sources */,
+				F9B54BA81FE5D5FD00F3A318 /* LessonViewController.swift in Sources */,
 				F9F374201FE883DB00D23DFC /* VisualObject.swift in Sources */,
 				F99FBE181F945C50001F6C20 /* TopicCell.swift in Sources */,
 				F99FBDFC1F94205F001F6C20 /* AppDelegate.swift in Sources */,
 				F9F374221FE883DB00D23DFC /* Sort.swift in Sources */,
-				F9B54BA61FE5B61900F3A318 /* LevelCell.swift in Sources */,
+				F9B54BA61FE5B61900F3A318 /* LessonCell.swift in Sources */,
 				F9F334531FE6DD650073A67B /* ZoomTransitionDelegate.swift in Sources */,
 				F9F374211FE883DB00D23DFC /* VisualView.swift in Sources */,
 				F97859411FE878F6001649D7 /* Lesson.swift in Sources */,
+				F95E9DF81FE9A16200D758F3 /* LessonButton.swift in Sources */,
 				F9F334551FE709310073A67B /* StudyViewController.swift in Sources */,
 				F99A19201FE4904300539AE9 /* TopicsViewController.swift in Sources */,
 			);

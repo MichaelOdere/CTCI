@@ -1,19 +1,25 @@
 import UIKit
 
-class LevelCell: UICollectionViewCell{
+class LessonCell: UICollectionViewCell{
 
     private struct InternalConstants {
         static let alphaSmallestValue: CGFloat = 0.85
         static let scaleDivisor: CGFloat = 10.0
     }
     
-    @IBOutlet weak var studyButton: UIButton!
-    @IBOutlet weak var quizButton: UIButton!
+    @IBOutlet weak var studyButton: LessonButton!
+    @IBOutlet weak var quizButton: LessonButton!
 
     @IBOutlet weak var lessonNumberLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
 
-    var indexPath:IndexPath!
+    var indexPath:IndexPath! {
+        
+        didSet {
+            studyButton.indexPath = indexPath
+            quizButton.indexPath = indexPath
+        }
+    }
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.layer.cornerRadius = 20
@@ -25,6 +31,7 @@ class LevelCell: UICollectionViewCell{
         self.layer.cornerRadius = 20
 
     }
+    
     open func scale(withCarouselInset carouselInset: CGFloat,
                     scaleMinimum: CGFloat = 0.9) {
         
