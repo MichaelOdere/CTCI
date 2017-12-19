@@ -52,8 +52,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iah-tJ-ojP">
+                                <rect key="frame" x="0.0" y="617" width="375" height="1"/>
+                                <color key="backgroundColor" red="0.81549221277236938" green="0.81967532634735107" blue="0.81955522298812866" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="YLB-Mz-MFo"/>
+                                </constraints>
+                            </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="VAl-zg-c2z">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="553"/>
                                 <color key="backgroundColor" red="0.97232657670974731" green="0.97647422552108765" blue="0.98048216104507446" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewLayout key="collectionViewLayout" id="CwD-xp-jzS" customClass="TopicLayout" customModule="CTCI" customModuleProvider="target"/>
                                 <cells>
@@ -97,10 +104,13 @@
                         </subviews>
                         <color key="backgroundColor" red="0.97232657670974731" green="0.97647422552108765" blue="0.98048216104507446" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="VAl-zg-c2z" firstAttribute="leading" secondItem="E8K-74-hRT" secondAttribute="leading" id="4dP-8d-W0s"/>
-                            <constraint firstItem="VAl-zg-c2z" firstAttribute="top" secondItem="E8K-74-hRT" secondAttribute="top" id="OH5-cg-ZDs"/>
-                            <constraint firstItem="VAl-zg-c2z" firstAttribute="bottom" secondItem="E8K-74-hRT" secondAttribute="bottom" id="VAx-8b-JNq"/>
-                            <constraint firstItem="VAl-zg-c2z" firstAttribute="trailing" secondItem="E8K-74-hRT" secondAttribute="trailing" id="ugj-pf-y9D"/>
+                            <constraint firstAttribute="trailing" secondItem="Iah-tJ-ojP" secondAttribute="trailing" id="9QP-z6-lVQ"/>
+                            <constraint firstItem="Iah-tJ-ojP" firstAttribute="leading" secondItem="d4h-fp-Hv2" secondAttribute="leading" id="LdV-i7-IBP"/>
+                            <constraint firstItem="VAl-zg-c2z" firstAttribute="trailing" secondItem="E8K-74-hRT" secondAttribute="trailing" id="O1l-py-Z1h"/>
+                            <constraint firstItem="Iah-tJ-ojP" firstAttribute="bottom" secondItem="E8K-74-hRT" secondAttribute="bottom" id="RSB-x9-YfU"/>
+                            <constraint firstItem="VAl-zg-c2z" firstAttribute="top" secondItem="E8K-74-hRT" secondAttribute="top" id="Tse-BI-vtH"/>
+                            <constraint firstItem="VAl-zg-c2z" firstAttribute="leading" secondItem="E8K-74-hRT" secondAttribute="leading" id="bep-5T-MIa"/>
+                            <constraint firstItem="Iah-tJ-ojP" firstAttribute="top" secondItem="VAl-zg-c2z" secondAttribute="bottom" id="yqy-kh-3Zr"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="E8K-74-hRT"/>
                     </view>
@@ -111,7 +121,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LMT-fW-AgG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-927" y="2301"/>
+            <point key="canvasLocation" x="-927.20000000000005" y="2300.5997001499254"/>
         </scene>
         <!--Topic-->
         <scene sceneID="iBo-Y4-pYJ">
