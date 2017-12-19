@@ -3,10 +3,13 @@ import UIKit
 class TopicsViewController:UIViewController{
     
     @IBOutlet weak var collectionView: UICollectionView!
+    var topicStore:TopicStore!
     
     override func viewDidLoad() {
         collectionView.delegate = self
         collectionView.dataSource = self
+        
+        print(topicStore.allTopics[0].lessons)
     }
 }
 

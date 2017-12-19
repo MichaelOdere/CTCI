@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		08A68CCD256C5902BE2949E6 /* Pods_CTCI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9E4729C3E15808923710356 /* Pods_CTCI.framework */; };
 		F924A9B71F9D6C6300B5496C /* QuestionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F924A9B61F9D6C6300B5496C /* QuestionStore.swift */; };
 		F978593F1FE878BD001649D7 /* Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F978593E1FE878BD001649D7 /* Topic.swift */; };
 		F97859411FE878F6001649D7 /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97859401FE878F6001649D7 /* Lesson.swift */; };
@@ -19,18 +20,21 @@
 		F99FBE061F94205F001F6C20 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99FBE041F94205F001F6C20 /* LaunchScreen.storyboard */; };
 		F99FBE141F943112001F6C20 /* TopicStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99FBE131F943112001F6C20 /* TopicStore.swift */; };
 		F99FBE181F945C50001F6C20 /* TopicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99FBE171F945C50001F6C20 /* TopicCell.swift */; };
-		F9A42AF11FDB4BCA00936819 /* Sort.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A42AF01FDB4BCA00936819 /* Sort.swift */; };
 		F9B54BA41FE4955E00F3A318 /* TopicLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B54BA31FE4955E00F3A318 /* TopicLayout.swift */; };
 		F9B54BA61FE5B61900F3A318 /* LevelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B54BA51FE5B61900F3A318 /* LevelCell.swift */; };
 		F9B54BA81FE5D5FD00F3A318 /* LevelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B54BA71FE5D5FD00F3A318 /* LevelViewController.swift */; };
-		F9D5E36B1FD9B2340073D118 /* VisualObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D5E36A1FD9B2340073D118 /* VisualObject.swift */; };
-		F9D5E36D1FD9B3440073D118 /* VisualizerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D5E36C1FD9B3440073D118 /* VisualizerViewController.swift */; };
-		F9D5E36F1FD9B4CB0073D118 /* VisualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D5E36E1FD9B4CB0073D118 /* VisualView.swift */; };
+		F9EACEF61FE8889D0070246C /* CTCI_Data.json in Resources */ = {isa = PBXBuildFile; fileRef = F9EACEF51FE8889D0070246C /* CTCI_Data.json */; };
 		F9F334531FE6DD650073A67B /* ZoomTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F334521FE6DD650073A67B /* ZoomTransitionDelegate.swift */; };
 		F9F334551FE709310073A67B /* StudyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F334541FE709310073A67B /* StudyViewController.swift */; };
+		F9F3741F1FE883DB00D23DFC /* VisualizerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F3741B1FE883DB00D23DFC /* VisualizerViewController.swift */; };
+		F9F374201FE883DB00D23DFC /* VisualObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F3741C1FE883DB00D23DFC /* VisualObject.swift */; };
+		F9F374211FE883DB00D23DFC /* VisualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F3741D1FE883DB00D23DFC /* VisualView.swift */; };
+		F9F374221FE883DB00D23DFC /* Sort.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F3741E1FE883DB00D23DFC /* Sort.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A156D74D81713B130A96A0B1 /* Pods-CTCI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CTCI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CTCI/Pods-CTCI.debug.xcconfig"; sourceTree = "<group>"; };
+		D44F58105ED9AAF466F00153 /* Pods-CTCI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CTCI.release.xcconfig"; path = "Pods/Target Support Files/Pods-CTCI/Pods-CTCI.release.xcconfig"; sourceTree = "<group>"; };
 		F924A9B61F9D6C6300B5496C /* QuestionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionStore.swift; sourceTree = "<group>"; };
 		F978593E1FE878BD001649D7 /* Topic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Topic.swift; sourceTree = "<group>"; };
 		F97859401FE878F6001649D7 /* Lesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lesson.swift; sourceTree = "<group>"; };
@@ -45,15 +49,17 @@
 		F99FBE071F94205F001F6C20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F99FBE131F943112001F6C20 /* TopicStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicStore.swift; sourceTree = "<group>"; };
 		F99FBE171F945C50001F6C20 /* TopicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCell.swift; sourceTree = "<group>"; };
-		F9A42AF01FDB4BCA00936819 /* Sort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sort.swift; sourceTree = "<group>"; };
 		F9B54BA31FE4955E00F3A318 /* TopicLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicLayout.swift; sourceTree = "<group>"; };
 		F9B54BA51FE5B61900F3A318 /* LevelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelCell.swift; sourceTree = "<group>"; };
 		F9B54BA71FE5D5FD00F3A318 /* LevelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelViewController.swift; sourceTree = "<group>"; };
-		F9D5E36A1FD9B2340073D118 /* VisualObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualObject.swift; sourceTree = "<group>"; };
-		F9D5E36C1FD9B3440073D118 /* VisualizerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualizerViewController.swift; sourceTree = "<group>"; };
-		F9D5E36E1FD9B4CB0073D118 /* VisualView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualView.swift; sourceTree = "<group>"; };
+		F9E4729C3E15808923710356 /* Pods_CTCI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CTCI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F9EACEF51FE8889D0070246C /* CTCI_Data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = CTCI_Data.json; path = CTCI/CTCI_Data.json; sourceTree = SOURCE_ROOT; };
 		F9F334521FE6DD650073A67B /* ZoomTransitionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomTransitionDelegate.swift; sourceTree = "<group>"; };
 		F9F334541FE709310073A67B /* StudyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyViewController.swift; sourceTree = "<group>"; };
+		F9F3741B1FE883DB00D23DFC /* VisualizerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualizerViewController.swift; sourceTree = "<group>"; };
+		F9F3741C1FE883DB00D23DFC /* VisualObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualObject.swift; sourceTree = "<group>"; };
+		F9F3741D1FE883DB00D23DFC /* VisualView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualView.swift; sourceTree = "<group>"; };
+		F9F3741E1FE883DB00D23DFC /* Sort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sort.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,21 +67,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08A68CCD256C5902BE2949E6 /* Pods_CTCI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		F91C321D1FE792D200B38881 /* Sort */ = {
+		1FC6B8DAE8909171B126BEAD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F9D5E36C1FD9B3440073D118 /* VisualizerViewController.swift */,
-				F9D5E36A1FD9B2340073D118 /* VisualObject.swift */,
-				F9A42AF01FDB4BCA00936819 /* Sort.swift */,
-				F9D5E36E1FD9B4CB0073D118 /* VisualView.swift */,
+				F9E4729C3E15808923710356 /* Pods_CTCI.framework */,
 			);
-			path = Sort;
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		570A138F1163FE743E7DD584 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A156D74D81713B130A96A0B1 /* Pods-CTCI.debug.xcconfig */,
+				D44F58105ED9AAF466F00153 /* Pods-CTCI.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		F924A9B81F9D6C6800B5496C /* Cell */ = {
@@ -92,6 +105,7 @@
 			children = (
 				F99FBE131F943112001F6C20 /* TopicStore.swift */,
 				F924A9B61F9D6C6300B5496C /* QuestionStore.swift */,
+				F9EACEF51FE8889D0070246C /* CTCI_Data.json */,
 			);
 			path = Stores;
 			sourceTree = "<group>";
@@ -123,8 +137,9 @@
 			isa = PBXGroup;
 			children = (
 				F99FBDFA1F94205F001F6C20 /* CTCI */,
-				F91C321D1FE792D200B38881 /* Sort */,
 				F99FBDF91F94205F001F6C20 /* Products */,
+				570A138F1163FE743E7DD584 /* Pods */,
+				1FC6B8DAE8909171B126BEAD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -148,8 +163,20 @@
 				F99FBE021F94205F001F6C20 /* Assets.xcassets */,
 				F99FBE041F94205F001F6C20 /* LaunchScreen.storyboard */,
 				F99FBE071F94205F001F6C20 /* Info.plist */,
+				F9F3741A1FE883DA00D23DFC /* Sort */,
 			);
 			path = CTCI;
+			sourceTree = "<group>";
+		};
+		F9F3741A1FE883DA00D23DFC /* Sort */ = {
+			isa = PBXGroup;
+			children = (
+				F9F3741B1FE883DB00D23DFC /* VisualizerViewController.swift */,
+				F9F3741C1FE883DB00D23DFC /* VisualObject.swift */,
+				F9F3741D1FE883DB00D23DFC /* VisualView.swift */,
+				F9F3741E1FE883DB00D23DFC /* Sort.swift */,
+			);
+			path = Sort;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -159,9 +186,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F99FBE0A1F942060001F6C20 /* Build configuration list for PBXNativeTarget "CTCI" */;
 			buildPhases = (
+				D4FB4E6B0CBF0E5BF32050E5 /* [CP] Check Pods Manifest.lock */,
 				F99FBDF41F94205F001F6C20 /* Sources */,
 				F99FBDF51F94205F001F6C20 /* Frameworks */,
 				F99FBDF61F94205F001F6C20 /* Resources */,
+				7D6FFB0E3C39AD1E628D1C50 /* [CP] Embed Pods Frameworks */,
+				2F4E37507E9B62B12DE8196E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -213,11 +243,66 @@
 			files = (
 				F99FBE061F94205F001F6C20 /* LaunchScreen.storyboard in Resources */,
 				F99FBE031F94205F001F6C20 /* Assets.xcassets in Resources */,
+				F9EACEF61FE8889D0070246C /* CTCI_Data.json in Resources */,
 				F99FBE011F94205F001F6C20 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2F4E37507E9B62B12DE8196E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CTCI/Pods-CTCI-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7D6FFB0E3C39AD1E628D1C50 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-CTCI/Pods-CTCI-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CTCI/Pods-CTCI-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D4FB4E6B0CBF0E5BF32050E5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CTCI-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F99FBDF41F94205F001F6C20 /* Sources */ = {
@@ -226,22 +311,22 @@
 			files = (
 				F924A9B71F9D6C6300B5496C /* QuestionStore.swift in Sources */,
 				F978593F1FE878BD001649D7 /* Topic.swift in Sources */,
+				F9F3741F1FE883DB00D23DFC /* VisualizerViewController.swift in Sources */,
 				F99FBE141F943112001F6C20 /* TopicStore.swift in Sources */,
 				F97859451FE8790A001649D7 /* Question.swift in Sources */,
 				F9B54BA41FE4955E00F3A318 /* TopicLayout.swift in Sources */,
 				F97859431FE87905001649D7 /* Note.swift in Sources */,
-				F9A42AF11FDB4BCA00936819 /* Sort.swift in Sources */,
 				F9B54BA81FE5D5FD00F3A318 /* LevelViewController.swift in Sources */,
+				F9F374201FE883DB00D23DFC /* VisualObject.swift in Sources */,
 				F99FBE181F945C50001F6C20 /* TopicCell.swift in Sources */,
 				F99FBDFC1F94205F001F6C20 /* AppDelegate.swift in Sources */,
+				F9F374221FE883DB00D23DFC /* Sort.swift in Sources */,
 				F9B54BA61FE5B61900F3A318 /* LevelCell.swift in Sources */,
-				F9D5E36F1FD9B4CB0073D118 /* VisualView.swift in Sources */,
 				F9F334531FE6DD650073A67B /* ZoomTransitionDelegate.swift in Sources */,
+				F9F374211FE883DB00D23DFC /* VisualView.swift in Sources */,
 				F97859411FE878F6001649D7 /* Lesson.swift in Sources */,
 				F9F334551FE709310073A67B /* StudyViewController.swift in Sources */,
-				F9D5E36D1FD9B3440073D118 /* VisualizerViewController.swift in Sources */,
 				F99A19201FE4904300539AE9 /* TopicsViewController.swift in Sources */,
-				F9D5E36B1FD9B2340073D118 /* VisualObject.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -376,6 +461,7 @@
 		};
 		F99FBE0B1F942060001F6C20 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A156D74D81713B130A96A0B1 /* Pods-CTCI.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -391,6 +477,7 @@
 		};
 		F99FBE0C1F942060001F6C20 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D44F58105ED9AAF466F00153 /* Pods-CTCI.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
