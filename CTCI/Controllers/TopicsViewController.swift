@@ -17,13 +17,15 @@ class TopicsViewController:UIViewController{
 extension TopicsViewController:UICollectionViewDelegate, UICollectionViewDataSource{
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return topicStore.allTopics.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TopicCell", for: indexPath) as! TopicCell
-        
-        cell.titleLabel.text = "Hello"
+        let index = indexPath.row
+        let topic = topicStore.allTopics[index]
+        cell.titleLabel.text = topic.title
+        cell.levelLabel.text = topic.currentLessonText()
         return cell
     }
     
