@@ -44,8 +44,7 @@ extension Note {
                 parsedBullets.append(str)
             }
         }
-        print("Bullets!!!!!!!!!!!!!!!!")
-        print(parsedBullets)
+
         self.init(title: title, bullets: parsedBullets)
     }
 }

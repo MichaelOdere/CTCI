@@ -12,6 +12,7 @@
 		F924A9B71F9D6C6300B5496C /* QuestionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F924A9B61F9D6C6300B5496C /* QuestionStore.swift */; };
 		F95E9DF61FE99BF100D758F3 /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95E9DF51FE99BF100D758F3 /* QuestionViewController.swift */; };
 		F95E9DF81FE9A16200D758F3 /* LessonButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95E9DF71FE9A16200D758F3 /* LessonButton.swift */; };
+		F96C574A1FEA17D100648CD8 /* CTCIPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96C57491FEA17D100648CD8 /* CTCIPalette.swift */; };
 		F978593F1FE878BD001649D7 /* Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F978593E1FE878BD001649D7 /* Topic.swift */; };
 		F97859411FE878F6001649D7 /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97859401FE878F6001649D7 /* Lesson.swift */; };
 		F97859431FE87905001649D7 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97859421FE87905001649D7 /* Note.swift */; };
@@ -42,6 +43,7 @@
 		F924A9B61F9D6C6300B5496C /* QuestionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionStore.swift; sourceTree = "<group>"; };
 		F95E9DF51FE99BF100D758F3 /* QuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
 		F95E9DF71FE9A16200D758F3 /* LessonButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonButton.swift; sourceTree = "<group>"; };
+		F96C57491FEA17D100648CD8 /* CTCIPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTCIPalette.swift; sourceTree = "<group>"; };
 		F978593E1FE878BD001649D7 /* Topic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Topic.swift; sourceTree = "<group>"; };
 		F97859401FE878F6001649D7 /* Lesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lesson.swift; sourceTree = "<group>"; };
 		F97859421FE87905001649D7 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				F95E9DF51FE99BF100D758F3 /* QuestionViewController.swift */,
 				F9F334521FE6DD650073A67B /* ZoomTransitionDelegate.swift */,
 				F9B54BA31FE4955E00F3A318 /* TopicLayout.swift */,
+				F99FBDFF1F94205F001F6C20 /* Main.storyboard */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -168,7 +171,7 @@
 				F97AAB641F950DA400691C16 /* Stores */,
 				F924A9B81F9D6C6800B5496C /* Cell */,
 				F97AAB661F950DE100691C16 /* Controllers */,
-				F99FBDFF1F94205F001F6C20 /* Main.storyboard */,
+				F96C57491FEA17D100648CD8 /* CTCIPalette.swift */,
 				F99FBE021F94205F001F6C20 /* Assets.xcassets */,
 				F99FBE041F94205F001F6C20 /* LaunchScreen.storyboard */,
 				F99FBE071F94205F001F6C20 /* Info.plist */,
@@ -282,10 +285,12 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-CTCI/Pods-CTCI-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -334,6 +339,7 @@
 				F9F374221FE883DB00D23DFC /* Sort.swift in Sources */,
 				F9B54BA61FE5B61900F3A318 /* LessonCell.swift in Sources */,
 				F9F334531FE6DD650073A67B /* ZoomTransitionDelegate.swift in Sources */,
+				F96C574A1FEA17D100648CD8 /* CTCIPalette.swift in Sources */,
 				F9F374211FE883DB00D23DFC /* VisualView.swift in Sources */,
 				F97859411FE878F6001649D7 /* Lesson.swift in Sources */,
 				F95E9DF81FE9A16200D758F3 /* LessonButton.swift in Sources */,

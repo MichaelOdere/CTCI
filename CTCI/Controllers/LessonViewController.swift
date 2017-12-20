@@ -15,7 +15,9 @@ class LessonViewController:UIViewController{
         collectionView?.contentInset = getInsets()
         collectionView.delegate = self
         collectionView.dataSource = self
-
+        collectionView.backgroundColor = CTCIPalette.primaryLightBlueBackgroundColor
+        self.view.backgroundColor = collectionView.backgroundColor
+        
     }
     
     func getInsets()->UIEdgeInsets{
@@ -52,6 +54,7 @@ extension LessonViewController:UICollectionViewDataSource{
         cell.quizButton.tag = 1
         
         cell.indexPath = indexPath
+        cell.scale(withCarouselInset: inset)
         return cell
     }
     

@@ -9,6 +9,10 @@ class StudyViewController:UIViewController{
     override func viewDidLoad() {
         tableView.delegate = self
         tableView.dataSource = self
+
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 90
+        
     }
 
 }
@@ -23,6 +27,11 @@ extension StudyViewController:UITableViewDelegate, UITableViewDataSource{
         cell.title.text = notes[indexPath.row].title
         cell.bullets.text = notes[indexPath.row].getBullets()
 
+        if indexPath.row % 2 == 0{
+            cell.backgroundColor = CTCIPalette.primaryLightBlueBackgroundColor
+        }else{
+            cell.backgroundColor = CTCIPalette.secondaryLightBlueBackgroundColor
+        }
         return cell
     }
 }
