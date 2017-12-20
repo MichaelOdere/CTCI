@@ -1,7 +1,6 @@
 import UIKit
 
 class LessonViewController:UIViewController{
-    
 
     @IBOutlet weak var collectionView: UICollectionView!
     let cellScaling: CGFloat = 0.6
@@ -68,6 +67,7 @@ extension LessonViewController:UICollectionViewDataSource{
         
         if sender.tag == 0{
             let vc = sb.instantiateViewController(withIdentifier: "StudyViewController") as! StudyViewController
+            vc.notes = topic.lessons[selectedIndexPath.row].notes
             self.navigationController?.pushViewController(vc, animated: true)
         
         }else if sender.tag == 1{

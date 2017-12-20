@@ -2,14 +2,27 @@ import Foundation
 import SwiftyJSON
 
 class Note {
-    var title:String
-    var descriptionText:String
+    var title: String
+    var bullets: [String]
     
-    init(title:String, descriptionText:String) {
+    init(title: String, bullets: [String]) {
         self.title = title
-        self.descriptionText = descriptionText
+        self.bullets = bullets
+        
     }
     
+    func getBullets()-> String{
+        
+        var bulletsFormat = ""
+        for b in bullets{
+            bulletsFormat.append("\u{2022}  ")
+            bulletsFormat.append(b)
+            bulletsFormat.append("\n")
+            
+        }
+        
+        return bulletsFormat
+    }
 }
 
 extension Note {
@@ -20,11 +33,19 @@ extension Note {
             return nil
         }
         
-        guard let descriptionText = json["descriptionText"].string else {
-            print("Error parsing user object for key: descriptionText")
+        guard let jsonBullets = json["bullets"].array else {
+            print("Error parsing user object for key: bullets")
             return nil
         }
         
-        self.init(title: title, descriptionText: descriptionText)
+        var parsedBullets:[String] = []
+        for data in jsonBullets{
+            if let str = data["bullet"].string{
+                parsedBullets.append(str)
+            }
+        }
+        print("Bullets!!!!!!!!!!!!!!!!")
+        print(parsedBullets)
+        self.init(title: title, bullets: parsedBullets)
     }
 }

@@ -38,7 +38,7 @@ extension Topic {
                 parsedLessons.append(lesson)
             }
         }
-        
+
         self.init(title: title, currentLesson: currentLesson, lessons: parsedLessons)
 
     }
