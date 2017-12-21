@@ -21,13 +21,17 @@ class LessonViewController:UIViewController{
         let months = ["\(topic.currentLesson) Completed", "\(topic.totalLessons - topic.currentLesson ) To Learn"]
         let unitsSold:[Double] = [Double(topic.currentLesson), Double(topic.totalLessons-topic.currentLesson)]
         myPieChartView.setChart(dataPoints: months, values: unitsSold)
+        myPieChartView.chartAnimator.animate(yAxisDuration: 1)
+        myPieChartView.data?.setDrawValues(false)
+
+        
     }
     
       func getInsets()->UIEdgeInsets{
         let screenSize = UIScreen.main.bounds.size
         let cellWidth = floor(screenSize.width * cellScaling)
         
-        let insetX = (view.bounds.width - cellWidth) / 2.0
+        let insetX = (view.bounds.width - cellWidth) / 2
         let insetY:CGFloat = 0.0
         inset = insetX
        
@@ -103,6 +107,7 @@ extension LessonViewController : UIScrollViewDelegate, UICollectionViewDelegate{
 
 extension LessonViewController:ZoomViewController{
     func zoomingCollectionViewCell(for transition: ZoomTransitioningDelegate) -> UIView? {
+        
         if let indexPath = selectedIndexPath{
             let cell = collectionView?.cellForItem(at: indexPath) as! LessonCell
             let frame = collectionView.convert(cell.frame, to: self.view)

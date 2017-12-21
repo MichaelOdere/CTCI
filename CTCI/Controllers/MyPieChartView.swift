@@ -12,11 +12,17 @@ class MyPieChartView:PieChartView{
     }
     
     func setUp(){
+        drawEntryLabelsEnabled = false
+        usePercentValuesEnabled = false
+        drawEntryLabelsEnabled = false
+        highlightPerTapEnabled = false
+        rotationEnabled = false
         drawHoleEnabled = false
-        usePercentValuesEnabled = true
         chartDescription?.text = ""
         legend.horizontalAlignment = .center
         legend.verticalAlignment = .bottom
+        data?.setDrawValues(false)
+
     }
     
     func setChart(dataPoints: [String], values: [Double]) {
@@ -27,8 +33,14 @@ class MyPieChartView:PieChartView{
             dataEntries.append(dataEntry1)
         }
         
-        let pieChartDataSet = PieChartDataSet(values: dataEntries, label: "Units Sold")
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .percent
+        formatter.maximumFractionDigits = 1
+        formatter.multiplier = 1.0
+
+        let pieChartDataSet = PieChartDataSet(values: dataEntries, label: "")
         let pieChartData = PieChartData(dataSet: pieChartDataSet)
+        pieChartData.setValueFormatter(DefaultValueFormatter(formatter: formatter))
         self.data = pieChartData
         
         pieChartDataSet.colors = [CTCIPalette.completeColor, CTCIPalette.incompleteColor]

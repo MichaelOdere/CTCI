@@ -4,11 +4,12 @@ import Charts
 class TopicsViewController:UIViewController{
     @IBOutlet weak var collectionView: UICollectionView!
     var topicStore:TopicStore!
+    var selectedIndexPath:IndexPath!
     
     override func viewDidLoad() {
         collectionView.delegate = self
         collectionView.dataSource = self
-       animateCollectionView()
+//       animateCollectionView()
     }
     
     func animateCollectionView(){
@@ -28,6 +29,7 @@ class TopicsViewController:UIViewController{
 
 extension TopicsViewController:UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedIndexPath = indexPath
         let sb = UIStoryboard(name: "Main", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "LessonViewController") as! LessonViewController
         vc.topic = topicStore.allTopics[indexPath.row]
@@ -45,8 +47,14 @@ extension TopicsViewController:UICollectionViewDelegate, UICollectionViewDataSou
         let topic = topicStore.allTopics[index]
         cell.titleLabel.text = topic.title
         cell.levelLabel.text = topic.currentLessonText()
+        let unitsSold:[Double] = [Double(topic.currentLesson), Double(topic.totalLessons-topic.currentLesson)]
+        let months = ["\(topic.currentLesson) Completed", "\(topic.totalLessons - topic.currentLesson ) To Learn"]
+        cell.myPieChartView.setChart(dataPoints: months, values: unitsSold)
+        cell.myPieChartView.isUserInteractionEnabled = false
+        cell.myPieChartView.data?.setDrawValues(false)
+
+        cell.myPieChartView.alpha = 0.5
         return cell
     }
-    
-    
 }
+

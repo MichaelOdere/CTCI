@@ -71,6 +71,10 @@
                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cln-Oh-Vob" customClass="MyPieChartView" customModule="CTCI" customModuleProvider="target">
+                                                    <rect key="frame" x="5" y="5" width="40" height="40"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Level" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x7J-KQ-P1F">
                                                     <rect key="frame" x="7" y="39.5" width="36" height="10.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -88,13 +92,18 @@
                                         <color key="backgroundColor" red="0.99989169836044312" green="1" blue="0.99988096952438354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstItem="x7J-KQ-P1F" firstAttribute="top" secondItem="52d-Cg-yIE" secondAttribute="bottom" constant="4" id="7y1-B2-uef"/>
+                                            <constraint firstAttribute="trailing" secondItem="Cln-Oh-Vob" secondAttribute="trailing" constant="5" id="Cqz-6i-ceh"/>
+                                            <constraint firstAttribute="bottom" secondItem="Cln-Oh-Vob" secondAttribute="bottom" constant="5" id="VBv-Ho-9xY"/>
                                             <constraint firstAttribute="bottom" secondItem="x7J-KQ-P1F" secondAttribute="bottom" id="b6H-Pl-pqk"/>
                                             <constraint firstItem="x7J-KQ-P1F" firstAttribute="centerX" secondItem="qMB-Hz-UpL" secondAttribute="centerX" id="ddV-nx-2rQ"/>
+                                            <constraint firstItem="Cln-Oh-Vob" firstAttribute="top" secondItem="qMB-Hz-UpL" secondAttribute="top" constant="5" id="mBT-6m-iQb"/>
+                                            <constraint firstItem="Cln-Oh-Vob" firstAttribute="leading" secondItem="qMB-Hz-UpL" secondAttribute="leading" constant="5" id="nUJ-PQ-hzn"/>
                                             <constraint firstItem="52d-Cg-yIE" firstAttribute="centerX" secondItem="qMB-Hz-UpL" secondAttribute="centerX" id="qmB-N4-clS"/>
                                             <constraint firstItem="52d-Cg-yIE" firstAttribute="centerY" secondItem="qMB-Hz-UpL" secondAttribute="centerY" id="rV5-qU-Rq7"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="levelLabel" destination="x7J-KQ-P1F" id="Zt6-UB-UFh"/>
+                                            <outlet property="myPieChartView" destination="Cln-Oh-Vob" id="RVD-Ar-V3O"/>
                                             <outlet property="titleLabel" destination="52d-Cg-yIE" id="T6A-8l-42c"/>
                                         </connections>
                                     </collectionViewCell>

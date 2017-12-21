@@ -4,7 +4,8 @@ class TopicCell: UICollectionViewCell{
     
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var levelLabel: UILabel!
-
+    @IBOutlet weak var myPieChartView: MyPieChartView!
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         initializeSelf()
