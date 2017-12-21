@@ -37,7 +37,7 @@ extension StudyViewController:UITableViewDelegate, UITableViewDataSource{
 }
 
 extension StudyViewController:ZoomViewController{
-    func zoomingCollectionViewCell(for transition: ZoomTransitioningDelegate) -> UIView? {
+    func zoomingView(for transition: ZoomTransitioningDelegate) -> UIView? {
         return visibleView
     }
 }

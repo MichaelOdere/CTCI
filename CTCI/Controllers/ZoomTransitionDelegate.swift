@@ -1,7 +1,7 @@
 import UIKit
 
 @objc protocol ZoomViewController {
-    func zoomingCollectionViewCell(for transition: ZoomTransitioningDelegate) -> UIView?
+    func zoomingView(for transition: ZoomTransitioningDelegate) -> UIView?
 }
 
 enum TransitionState{
@@ -57,8 +57,8 @@ extension ZoomTransitioningDelegate: UIViewControllerAnimatedTransitioning{
             foregroundVC = fromVC
         }
         
-        let maybeBackgroundView = (backgroundVC as? ZoomViewController)?.zoomingCollectionViewCell(for: self)
-        let maybeForegroundView = (foregroundVC as? ZoomViewController)?.zoomingCollectionViewCell(for: self)
+        let maybeBackgroundView = (backgroundVC as? ZoomViewController)?.zoomingView(for: self)
+        let maybeForegroundView = (foregroundVC as? ZoomViewController)?.zoomingView(for: self)
                 
         assert(maybeBackgroundView != nil, "Cannot find view in background")
         assert(maybeForegroundView != nil, "Cannot find view in foreground")
@@ -69,6 +69,12 @@ extension ZoomTransitioningDelegate: UIViewControllerAnimatedTransitioning{
         let viewSnapshot:UIView = UIView(frame: backgroundView.frame)
         
         viewSnapshot.backgroundColor = backgroundView.backgroundColor
+//
+//        if let foregroundView = foregroundView as? MyPieChartView {
+//            viewSnapshot = MyPieChartView(frame: backgroundView.frame)
+//            viewSnapshot.data = foregroundView.data
+//            viewSnapshot.backgroundColor = foregroundView.backgroundColor
+//        }
         
         viewSnapshot.layer.masksToBounds = true
         

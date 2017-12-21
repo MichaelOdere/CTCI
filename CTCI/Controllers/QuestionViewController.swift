@@ -6,7 +6,7 @@ class QuestionViewController:UIViewController{
 }
 
 extension QuestionViewController:ZoomViewController{
-    func zoomingCollectionViewCell(for transition: ZoomTransitioningDelegate) -> UIView? {
+    func zoomingView(for transition: ZoomTransitioningDelegate) -> UIView? {
         return visibleView
     }
 }

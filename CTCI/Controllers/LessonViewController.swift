@@ -21,9 +21,9 @@ class LessonViewController:UIViewController{
         let months = ["\(topic.currentLesson) Completed", "\(topic.totalLessons - topic.currentLesson ) To Learn"]
         let unitsSold:[Double] = [Double(topic.currentLesson), Double(topic.totalLessons-topic.currentLesson)]
         myPieChartView.setChart(dataPoints: months, values: unitsSold)
-        myPieChartView.chartAnimator.animate(yAxisDuration: 1)
+//        myPieChartView.chartAnimator.animate(yAxisDuration: 1)
         myPieChartView.data?.setDrawValues(false)
-
+        myPieChartView.backgroundColor = collectionView.backgroundColor
         
     }
     
@@ -64,10 +64,6 @@ extension LessonViewController:UICollectionViewDataSource{
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.selectedIndexPath = indexPath
-    }
-    
     @objc func loadView(_ sender:LessonButton){
         let sb = UIStoryboard(name: "Main", bundle: nil)
         selectedIndexPath = sender.indexPath
@@ -106,14 +102,13 @@ extension LessonViewController : UIScrollViewDelegate, UICollectionViewDelegate{
 }
 
 extension LessonViewController:ZoomViewController{
-    func zoomingCollectionViewCell(for transition: ZoomTransitioningDelegate) -> UIView? {
-        
+    func zoomingView(for transition: ZoomTransitioningDelegate) -> UIView? {
+        print("selected index path \(selectedIndexPath)")
         if let indexPath = selectedIndexPath{
             let cell = collectionView?.cellForItem(at: indexPath) as! LessonCell
             let frame = collectionView.convert(cell.frame, to: self.view)
             let v = UIView(frame: frame)
             v.backgroundColor = cell.backgroundColor
-
             return v
         }
         return nil
