@@ -1,14 +1,13 @@
 import UIKit
+import Charts
 
 class TopicsViewController:UIViewController{
-    
     @IBOutlet weak var collectionView: UICollectionView!
     var topicStore:TopicStore!
     
     override func viewDidLoad() {
         collectionView.delegate = self
         collectionView.dataSource = self
-        
        animateCollectionView()
     }
     
@@ -24,12 +23,10 @@ class TopicsViewController:UIViewController{
             self.collectionView.alpha = 1.0
         }, completion: nil)
     }
-    
 }
 
 
 extension TopicsViewController:UICollectionViewDelegate, UICollectionViewDataSource{
-
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let sb = UIStoryboard(name: "Main", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "LessonViewController") as! LessonViewController

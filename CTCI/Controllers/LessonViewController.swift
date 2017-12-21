@@ -1,15 +1,15 @@
 import UIKit
+import Charts
 
 class LessonViewController:UIViewController{
-
     @IBOutlet weak var collectionView: UICollectionView!
-    let cellScaling: CGFloat = 0.6
+    @IBOutlet weak var myPieChartView: MyPieChartView!
     @IBInspectable public var inset: CGFloat = 0
     var selectedIndexPath:IndexPath!
     var topic:Topic!
-    
+    let cellScaling: CGFloat = 0.6
+
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         
         collectionView?.contentInset = getInsets()
@@ -17,10 +17,13 @@ class LessonViewController:UIViewController{
         collectionView.dataSource = self
         collectionView.backgroundColor = CTCIPalette.primaryLightBlueBackgroundColor
         self.view.backgroundColor = collectionView.backgroundColor
-        
+
+        let months = ["\(topic.currentLesson) Completed", "\(topic.totalLessons - topic.currentLesson ) To Learn"]
+        let unitsSold:[Double] = [Double(topic.currentLesson), Double(topic.totalLessons-topic.currentLesson)]
+        myPieChartView.setChart(dataPoints: months, values: unitsSold)
     }
     
-    func getInsets()->UIEdgeInsets{
+      func getInsets()->UIEdgeInsets{
         let screenSize = UIScreen.main.bounds.size
         let cellWidth = floor(screenSize.width * cellScaling)
         
@@ -37,7 +40,6 @@ class LessonViewController:UIViewController{
 }
 
 extension LessonViewController:UICollectionViewDataSource{
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return topic.lessons.count
     }
@@ -63,11 +65,8 @@ extension LessonViewController:UICollectionViewDataSource{
     }
     
     @objc func loadView(_ sender:LessonButton){
-        
         let sb = UIStoryboard(name: "Main", bundle: nil)
-
         selectedIndexPath = sender.indexPath
-        
         if sender.tag == 0{
             let vc = sb.instantiateViewController(withIdentifier: "StudyViewController") as! StudyViewController
             vc.notes = topic.lessons[selectedIndexPath.row].notes
@@ -78,7 +77,6 @@ extension LessonViewController:UICollectionViewDataSource{
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
-    
 }
 
 extension LessonViewController : UIScrollViewDelegate, UICollectionViewDelegate{
@@ -95,12 +93,10 @@ extension LessonViewController : UIScrollViewDelegate, UICollectionViewDelegate{
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
         for cell in collectionView.visibleCells{
             if let lessonCell = cell as? LessonCell {
                 lessonCell.scale(withCarouselInset: inset)
             }
-
         }
     }
 }

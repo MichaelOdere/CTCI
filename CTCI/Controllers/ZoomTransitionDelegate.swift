@@ -15,7 +15,7 @@ class ZoomTransitioningDelegate:NSObject{
     private let zoomScale = CGFloat(15)
     private let backgroundScale = CGFloat(0.7)
     
-    typealias ZoomingViews = (uiView: UIView, uiView:UIView)//(collectionView: UICollectionView, imageView: UIView, levelCell: LevelCell)
+    typealias ZoomingViews = (uiView: UIView, uiView:UIView)
     
     func configureViews(for state: TransitionState, containerView: UIView, backgroundViewController: UIViewController, foregroundViewController: UIViewController, viewsInBackground: ZoomingViews, viewsInForeground: ZoomingViews, snapshotViews: ZoomingViews){
         

@@ -17,6 +17,7 @@
 		F97859411FE878F6001649D7 /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97859401FE878F6001649D7 /* Lesson.swift */; };
 		F97859431FE87905001649D7 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97859421FE87905001649D7 /* Note.swift */; };
 		F97859451FE8790A001649D7 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97859441FE8790A001649D7 /* Question.swift */; };
+		F98A9A9D1FEB33D30001D84B /* MyPieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98A9A9C1FEB33D30001D84B /* MyPieChartView.swift */; };
 		F99A19201FE4904300539AE9 /* TopicsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99A191F1FE4904300539AE9 /* TopicsViewController.swift */; };
 		F99FBDFC1F94205F001F6C20 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99FBDFB1F94205F001F6C20 /* AppDelegate.swift */; };
 		F99FBE011F94205F001F6C20 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F99FBDFF1F94205F001F6C20 /* Main.storyboard */; };
@@ -48,6 +49,7 @@
 		F97859401FE878F6001649D7 /* Lesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lesson.swift; sourceTree = "<group>"; };
 		F97859421FE87905001649D7 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		F97859441FE8790A001649D7 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
+		F98A9A9C1FEB33D30001D84B /* MyPieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPieChartView.swift; sourceTree = "<group>"; };
 		F99A191F1FE4904300539AE9 /* TopicsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsViewController.swift; sourceTree = "<group>"; };
 		F99FBDF81F94205F001F6C20 /* CTCI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CTCI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F99FBDFB1F94205F001F6C20 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 			children = (
 				F99A191F1FE4904300539AE9 /* TopicsViewController.swift */,
 				F9B54BA71FE5D5FD00F3A318 /* LessonViewController.swift */,
+				F98A9A9C1FEB33D30001D84B /* MyPieChartView.swift */,
 				F9F334541FE709310073A67B /* StudyViewController.swift */,
 				F95E9DF51FE99BF100D758F3 /* QuestionViewController.swift */,
 				F9F334521FE6DD650073A67B /* ZoomTransitionDelegate.swift */,
@@ -326,6 +329,7 @@
 				F95E9DF61FE99BF100D758F3 /* QuestionViewController.swift in Sources */,
 				F924A9B71F9D6C6300B5496C /* QuestionStore.swift in Sources */,
 				F978593F1FE878BD001649D7 /* Topic.swift in Sources */,
+				F98A9A9D1FEB33D30001D84B /* MyPieChartView.swift in Sources */,
 				F9F3741F1FE883DB00D23DFC /* VisualizerViewController.swift in Sources */,
 				F99FBE141F943112001F6C20 /* TopicStore.swift in Sources */,
 				F97859451FE8790A001649D7 /* Question.swift in Sources */,

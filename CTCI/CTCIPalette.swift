@@ -5,6 +5,8 @@ public struct CTCIPalette {
     static public let primaryLightBlueBackgroundColor = UIColor(r: 162, g: 209, b: 220)
     static public let secondaryLightBlueBackgroundColor = UIColor(r: 194, g: 230, b: 240)
     static public let vanillaBackgroundColor = UIColor(r: 242, g: 242, b: 235)
+    static public let completeColor = UIColor(r: 11, g: 170, b: 138)
+    static public let incompleteColor = UIColor(r: 252, g: 66, b: 110)
 
     
 }

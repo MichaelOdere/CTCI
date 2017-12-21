@@ -123,7 +123,7 @@
             </objects>
             <point key="canvasLocation" x="-927.20000000000005" y="2300.5997001499254"/>
         </scene>
-        <!--Topic-->
+        <!--Lesson-->
         <scene sceneID="iBo-Y4-pYJ">
             <objects>
                 <viewController storyboardIdentifier="LessonViewController" id="snV-9e-oYG" customClass="LessonViewController" customModule="CTCI" customModuleProvider="target" sceneMemberID="viewController">
@@ -133,7 +133,7 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="6Tg-Nf-pEM">
                                 <rect key="frame" x="0.0" y="347" width="375" height="231"/>
-                                <color key="backgroundColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="OFl-Ip-Ohn">
                                     <size key="itemSize" width="249" height="203"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -206,19 +206,28 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="suh-po-f38" customClass="MyPieChartView" customModule="CTCI" customModuleProvider="target">
+                                <rect key="frame" x="40" y="104" width="295" height="203"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="suh-po-f38" firstAttribute="leading" secondItem="VwE-KV-fR0" secondAttribute="leading" constant="40" id="01D-3o-uqR"/>
+                            <constraint firstItem="6Tg-Nf-pEM" firstAttribute="top" secondItem="suh-po-f38" secondAttribute="bottom" constant="40" id="3Rs-G7-ovD"/>
+                            <constraint firstItem="VwE-KV-fR0" firstAttribute="trailing" secondItem="suh-po-f38" secondAttribute="trailing" constant="40" id="BfP-k0-kr2"/>
                             <constraint firstItem="VwE-KV-fR0" firstAttribute="bottom" secondItem="6Tg-Nf-pEM" secondAttribute="bottom" constant="40" id="HUM-k4-w9E"/>
                             <constraint firstItem="6Tg-Nf-pEM" firstAttribute="top" secondItem="VwE-KV-fR0" secondAttribute="top" constant="283" id="KEL-jV-tay"/>
                             <constraint firstItem="6Tg-Nf-pEM" firstAttribute="trailing" secondItem="VwE-KV-fR0" secondAttribute="trailing" id="PuH-F7-Tzn"/>
                             <constraint firstItem="6Tg-Nf-pEM" firstAttribute="leading" secondItem="VwE-KV-fR0" secondAttribute="leading" id="ejy-gC-hfs"/>
+                            <constraint firstItem="suh-po-f38" firstAttribute="top" secondItem="VwE-KV-fR0" secondAttribute="top" constant="40" id="wfX-Eb-9mg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VwE-KV-fR0"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Topic" id="KFE-YB-yCc"/>
+                    <navigationItem key="navigationItem" title="Lesson" id="KFE-YB-yCc"/>
                     <connections>
                         <outlet property="collectionView" destination="6Tg-Nf-pEM" id="TK5-ll-7mL"/>
+                        <outlet property="myPieChartView" destination="suh-po-f38" id="wcn-eT-vRl"/>
                         <segue destination="1Yu-01-Z8L" kind="show" id="sht-8O-PLN"/>
                         <segue destination="ddG-bF-FLH" kind="show" id="0j7-nl-4nr"/>
                     </connections>
