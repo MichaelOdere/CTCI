@@ -4,14 +4,25 @@ import UIKit
     func zoomingView(for transition: ZoomTransitioningDelegate) -> UIView?
 }
 
+@objc protocol ZoomPieViewController {
+    func zoomingPieView(for transition: ZoomTransitioningDelegate) -> MyPieChartView?
+}
+
 enum TransitionState{
     case initial
     case final
 }
 
+enum TransitionType{
+    case pieView
+    case lessonView
+}
+
 class ZoomTransitioningDelegate:NSObject{
     var transitionDuration = 0.5
     var operation: UINavigationControllerOperation = .none
+    var transitionType: TransitionType!
+    
     private let zoomScale = CGFloat(15)
     private let backgroundScale = CGFloat(0.7)
     
@@ -43,39 +54,59 @@ extension ZoomTransitioningDelegate: UIViewControllerAnimatedTransitioning{
         return transitionDuration
     }
     
+    func getVC(vc:UIViewController)->UIView?{
+        switch transitionType {
+        case .pieView:
+            return (vc as? ZoomPieViewController)?.zoomingPieView(for: self)
+        case .lessonView:
+            return (vc as? ZoomViewController)?.zoomingView(for: self)
+        default:
+            return nil
+        }
+    }
+    
+    func getViewSnapShot(foregroundView:UIView)->UIView?{
+        switch transitionType {
+        case .pieView:
+            let pieView = MyPieChartView(frame: foregroundView.frame)
+            pieView.data = (foregroundView as? MyPieChartView)?.data
+            return pieView
+        case .lessonView:
+           return UIView(frame: foregroundView.frame)
+        default:
+            return nil
+        }
+    }
+
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         let duration = transitionDuration(using: transitionContext)
         let fromVC = transitionContext.viewController(forKey: .from)!
         let toVC = transitionContext.viewController(forKey: .to)!
         let containerView = transitionContext.containerView
-        
+
         var backgroundVC = fromVC
         var foregroundVC = toVC
-        
+
         if operation == .pop{
             backgroundVC = toVC
             foregroundVC = fromVC
         }
-        
-        let maybeBackgroundView = (backgroundVC as? ZoomViewController)?.zoomingView(for: self)
-        let maybeForegroundView = (foregroundVC as? ZoomViewController)?.zoomingView(for: self)
-                
+
+        let maybeBackgroundView = getVC(vc: backgroundVC)
+        let maybeForegroundView = getVC(vc: foregroundVC)
+
         assert(maybeBackgroundView != nil, "Cannot find view in background")
         assert(maybeForegroundView != nil, "Cannot find view in foreground")
-        
+
         let backgroundView = maybeBackgroundView!
         let foregroundView = maybeForegroundView!
         
-        let viewSnapshot:UIView = UIView(frame: backgroundView.frame)
-        
+        let maybeViewSnapshot = getViewSnapShot(foregroundView: foregroundView)
+        assert(maybeViewSnapshot != nil, "Cannot find view in viewSnapShot")
+
+        let viewSnapshot = maybeViewSnapshot!
+
         viewSnapshot.backgroundColor = backgroundView.backgroundColor
-//
-//        if let foregroundView = foregroundView as? MyPieChartView {
-//            viewSnapshot = MyPieChartView(frame: backgroundView.frame)
-//            viewSnapshot.data = foregroundView.data
-//            viewSnapshot.backgroundColor = foregroundView.backgroundColor
-//        }
-        
         viewSnapshot.layer.masksToBounds = true
         
         backgroundView.isHidden = true
@@ -126,6 +157,11 @@ extension ZoomTransitioningDelegate: UINavigationControllerDelegate{
         
         if fromVC is ZoomViewController && toVC is ZoomViewController{
             self.operation = operation
+            self.transitionType = .lessonView
+            return self
+        }else if fromVC is ZoomPieViewController && toVC is ZoomPieViewController{
+            self.operation = operation
+            self.transitionType = .pieView
             return self
         }else{
             return nil

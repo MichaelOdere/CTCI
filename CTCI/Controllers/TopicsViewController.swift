@@ -58,13 +58,13 @@ extension TopicsViewController:UICollectionViewDelegate, UICollectionViewDataSou
     }
 }
 
-//extension TopicsViewController:ZoomViewController{
-//    func zoomingCollectionViewCell(for transition: ZoomTransitioningDelegate) -> UIView? {
-//        if let indexPath = selectedIndexPath{
-//            let cell = collectionView?.cellForItem(at: indexPath) as! TopicCell
-//            return cell.myPieChartView
-//        }
-//        return nil
-//    }
-//}
+extension TopicsViewController:ZoomPieViewController{
+    func zoomingPieView(for transition: ZoomTransitioningDelegate) -> MyPieChartView? {
+        if let indexPath = selectedIndexPath{
+            let cell = collectionView?.cellForItem(at: indexPath) as! TopicCell
+            return cell.myPieChartView
+        }
+        return nil
+    }
+}
 

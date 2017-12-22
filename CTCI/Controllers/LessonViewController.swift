@@ -103,7 +103,6 @@ extension LessonViewController : UIScrollViewDelegate, UICollectionViewDelegate{
 
 extension LessonViewController:ZoomViewController{
     func zoomingView(for transition: ZoomTransitioningDelegate) -> UIView? {
-        print("selected index path \(selectedIndexPath)")
         if let indexPath = selectedIndexPath{
             let cell = collectionView?.cellForItem(at: indexPath) as! LessonCell
             let frame = collectionView.convert(cell.frame, to: self.view)
@@ -114,4 +113,14 @@ extension LessonViewController:ZoomViewController{
         return nil
     }
 }
+
+extension LessonViewController:ZoomPieViewController{
+    func zoomingPieView(for transition: ZoomTransitioningDelegate) -> MyPieChartView? {
+        if let view = myPieChartView{
+            return view
+        }
+        return nil
+    }
+}
+
 
