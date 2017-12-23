@@ -22,7 +22,6 @@ class MyPieChartView:PieChartView{
         legend.horizontalAlignment = .center
         legend.verticalAlignment = .bottom
         data?.setDrawValues(false)
-
     }
     
     func setChart(dataPoints: [String], values: [Double]) {
@@ -44,6 +43,14 @@ class MyPieChartView:PieChartView{
         self.data = pieChartData
         
         pieChartDataSet.colors = [CTCIPalette.completeColor, CTCIPalette.incompleteColor]
+    }
+    
+    func createLabels(topic:Topic)->[String]{
+        return ["\(topic.currentLesson) Completed", "\(topic.totalLessons - topic.currentLesson ) To Learn"]
+    }
+    
+    func createValues(topic:Topic)->[Double]{
+        return [Double(topic.currentLesson), Double(topic.totalLessons-topic.currentLesson)]
     }
 }
 

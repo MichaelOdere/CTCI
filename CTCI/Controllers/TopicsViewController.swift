@@ -9,7 +9,7 @@ class TopicsViewController:UIViewController{
     override func viewDidLoad() {
         collectionView.delegate = self
         collectionView.dataSource = self
-//       animateCollectionView()
+       animateCollectionView()
     }
     
     func animateCollectionView(){
@@ -46,10 +46,9 @@ extension TopicsViewController:UICollectionViewDelegate, UICollectionViewDataSou
         let index = indexPath.row
         let topic = topicStore.allTopics[index]
         cell.titleLabel.text = topic.title
-        cell.levelLabel.text = topic.currentLessonText()
-        let unitsSold:[Double] = [Double(topic.currentLesson), Double(topic.totalLessons-topic.currentLesson)]
-        let months = ["\(topic.currentLesson) Completed", "\(topic.totalLessons - topic.currentLesson ) To Learn"]
-        cell.myPieChartView.setChart(dataPoints: months, values: unitsSold)
+        let labels = cell.myPieChartView.createLabels(topic: topic)
+        let values = cell.myPieChartView.createValues(topic: topic)
+        cell.myPieChartView.setChart(dataPoints: labels, values: values)
         cell.myPieChartView.isUserInteractionEnabled = false
         cell.myPieChartView.data?.setDrawValues(false)
 
@@ -58,13 +57,13 @@ extension TopicsViewController:UICollectionViewDelegate, UICollectionViewDataSou
     }
 }
 
-extension TopicsViewController:ZoomPieViewController{
-    func zoomingPieView(for transition: ZoomTransitioningDelegate) -> MyPieChartView? {
-        if let indexPath = selectedIndexPath{
-            let cell = collectionView?.cellForItem(at: indexPath) as! TopicCell
-            return cell.myPieChartView
-        }
-        return nil
-    }
-}
+//extension TopicsViewController:ZoomPieViewController{
+//    func zoomingPieView(for transition: ZoomTransitioningDelegate) -> MyPieChartView? {
+//        if let indexPath = selectedIndexPath{
+//            let cell = collectionView?.cellForItem(at: indexPath) as! TopicCell
+//            return cell.myPieChartView
+//        }
+//        return nil
+//    }
+//}
 

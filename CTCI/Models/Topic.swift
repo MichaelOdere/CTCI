@@ -13,11 +13,6 @@ class Topic {
         self.totalLessons = lessons.count
         self.lessons = lessons
     }
-    
-    func currentLessonText()->String{
-        
-        return "\(currentLesson) of \(totalLessons) Completed"
-    }
 }
 extension Topic {
     convenience init?(json: JSON, currentLesson:Int) {
@@ -42,6 +37,5 @@ extension Topic {
         self.init(title: title, currentLesson: currentLesson, lessons: parsedLessons)
 
     }
-    
 }
 

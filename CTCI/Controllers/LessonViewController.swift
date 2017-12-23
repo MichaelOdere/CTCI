@@ -18,13 +18,12 @@ class LessonViewController:UIViewController{
         collectionView.backgroundColor = CTCIPalette.primaryLightBlueBackgroundColor
         self.view.backgroundColor = collectionView.backgroundColor
 
-        let months = ["\(topic.currentLesson) Completed", "\(topic.totalLessons - topic.currentLesson ) To Learn"]
-        let unitsSold:[Double] = [Double(topic.currentLesson), Double(topic.totalLessons-topic.currentLesson)]
-        myPieChartView.setChart(dataPoints: months, values: unitsSold)
-//        myPieChartView.chartAnimator.animate(yAxisDuration: 1)
+        let labels = myPieChartView.createLabels(topic: topic)
+        let values = myPieChartView.createValues(topic: topic)
+
+        myPieChartView.setChart(dataPoints: labels, values: values)
         myPieChartView.data?.setDrawValues(false)
-        myPieChartView.backgroundColor = collectionView.backgroundColor
-        
+//        myPieChartView.backgroundColor = self.view.backgroundColor
     }
     
       func getInsets()->UIEdgeInsets{
@@ -40,7 +39,6 @@ class LessonViewController:UIViewController{
         
         return UIEdgeInsets(top: insetY, left: insetX, bottom: insetY, right: insetX)
     }
-
 }
 
 extension LessonViewController:UICollectionViewDataSource{
@@ -71,7 +69,6 @@ extension LessonViewController:UICollectionViewDataSource{
             let vc = sb.instantiateViewController(withIdentifier: "StudyViewController") as! StudyViewController
             vc.notes = topic.lessons[selectedIndexPath.row].notes
             self.navigationController?.pushViewController(vc, animated: true)
-        
         }else if sender.tag == 1{
             let vc = sb.instantiateViewController(withIdentifier: "QuestionViewController") as! QuestionViewController
             self.navigationController?.pushViewController(vc, animated: true)
